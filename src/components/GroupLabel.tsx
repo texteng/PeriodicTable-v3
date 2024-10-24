@@ -21,9 +21,9 @@ const GroupLabel: React.FC<iGroupLabelProps> = ({ data, hover }) => {
       onMouseOver={() => handleHoverOver()}
       onMouseOut={() => handleHoverLeave()}
     >
-        <a href={ `https://www.wikipedia.com/wiki/Group_${data.groupNumber}_element`} target="_blank">
-          <span className='text-md md:text-base lg:text-xl xl:text-2xl 2xl:text-3xl group-number block'>{data.groupNumber}</span>
-          <span className='hidden md:text-xs lg:text-sm md:block xl:text-lg 2xl:text-2xl group-roman-numeral'>{data.title}</span>
+      <a href={`https://www.wikipedia.com/wiki/Group_${data.groupNumber}_element`} target="_blank">
+        <span className='text-md md:text-base lg:text-xl xl:text-2xl 2xl:text-3xl group-number block'>{data.groupNumber}</span>
+        <span className='hidden md:text-xs lg:text-sm md:block xl:text-lg 2xl:text-2xl group-roman-numeral'>{data.title}</span>
       </a>
 
     </div>

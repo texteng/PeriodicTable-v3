@@ -48,20 +48,20 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, currentElement }) => {
           <div>
             <div className='inline-block border-2 hover:border-blue-600'>
               <a href={currentElement.image.url} target="_blank">
-                <img 
-                  src={ currentElement.image.url }
-                  aria-description={ currentElement.image.attribution }
+                <img
+                  src={currentElement.image.url}
+                  aria-description={currentElement.image.attribution}
                   alt={currentElement.image.title}
-                  style={{width: '100px'}}/>
+                  style={{ width: '100px' }} />
               </a>
               {/* <span className="text-center text-xs">{ currentElement.image.title} </span> */}
             </div>
             <div className='inline-block border-2 hover:border-blue-600'>
               <a href={currentElement.bohr_model_image} target="_blank">
-                <img 
-                  src={ currentElement.bohr_model_image }
-                  alt={ `${currentElement.name} Bohr Model`}
-                  style={{width: '100px'}}
+                <img
+                  src={currentElement.bohr_model_image}
+                  alt={`${currentElement.name} Bohr Model`}
+                  style={{ width: '100px' }}
                 />
               </a>
             </div>

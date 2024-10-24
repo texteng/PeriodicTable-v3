@@ -11,7 +11,7 @@
     "build-json": "node ./src/json/json_parser.cjs"
   },
   "dependencies": {
-
+    "postcss-custom-properties": "^14.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -19,15 +19,15 @@
     "@eslint/js": "^9.11.1",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.2",
     "@typescript-eslint/eslint-plugin": "^8.8.1",
     "@typescript-eslint/parser": "^8.8.1",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint-plugin-react": "^7.37.1",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^9.12.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",

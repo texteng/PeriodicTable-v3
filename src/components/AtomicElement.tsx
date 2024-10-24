@@ -21,7 +21,7 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   const defaultTextColor = { color: getTextColor(colorIndex, element) };
   const className = "element absolute text-center rounded-md p-1 border border-gray-400 hover:border-gray-600 hover:shadow-inner transition-opacity ease-in-out duration-100";
   const massNumber = renderMassNumber(element.atomic_mass);
-  const defaultAdditionalInfo = { info:  massNumber}
+  const defaultAdditionalInfo = { info: massNumber }
 
   const defaultStyles = { filter: "grayscale(0%)", opacity: 1 };
   const obscureStyles = { filter: "grayscale(80%)", opacity: .25 };
@@ -50,7 +50,7 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   }, [obscure]);
 
   useEffect(() => {
-    setStyle({ 
+    setStyle({
       ...style,
       color: getTextColor(colorIndex, element),
       background: getBackgroundColor(colorIndex, element)
@@ -102,7 +102,7 @@ const getTextColor = function (colorIndex: string, element: iElement) {
   return data.dark ? "#FFFFFF" : "#000000";
 };
 
-const getAdditionalInfo = function(colorIndex: string, element: iElement): string {
+const getAdditionalInfo = function (colorIndex: string, element: iElement): string {
   if (colorIndex === 'cpk') {
     return renderMassNumber(element.atomic_mass);
   } else if (colorIndex === 'bonding_type' || colorIndex === 'group_block') {

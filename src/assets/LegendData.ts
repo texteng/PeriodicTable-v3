@@ -1,4 +1,4 @@
-const Legends ={
+const Legends = {
     "category": {
         "title": "Elemental Categories",
         "colors": [

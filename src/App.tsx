@@ -27,7 +27,7 @@ function App() {
   const [currentElement, setCurrentElement] = useState({ ...defaultCurrentElement });
   const [otherElementHighlighted, setOtherElementHighlighted] = useState({ ...defaultOtherElementHighlighted });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [colorIndexData, setColorIndex] = useState({...defaultColorIndex});
+  const [colorIndexData, setColorIndex] = useState({ ...defaultColorIndex });
 
   const renderGroupLabels = () => {
     const headerArr = [];

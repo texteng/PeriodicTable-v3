@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+src/json/pt_json1.json
+src/json/pt_json2.json

@@ -18,7 +18,7 @@ const PeriodLabel: React.FC<iPeriodLabelProps> = ({ data, hover }) => {
       onMouseOver={() => handleHoverOver()}
       onMouseOut={() => handleHoverLeave()}
     >
-      <a href={ `https://www.wikipedia.com/wiki/Period_${data.periodNumber}_element`} target="_blank">
+      <a href={`https://www.wikipedia.com/wiki/Period_${data.periodNumber}_element`} target="_blank">
         <span className='text-md md:text-base lg:text-xl xl:text-2xl 2xl:text-3xl block`'>{data.periodNumber}</span>
       </a>
     </div>

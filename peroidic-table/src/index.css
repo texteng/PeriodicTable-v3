@@ -1,0 +1,68 @@
+@import './styles/variables.css';
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Can not use var(--l-min-width) for media queries  */
+$l-min-width: 1170px;
+$m-min-width: 1056px;
+
+$sm-width: 640px;
+$md-width: 768px;
+$lg-width: 1024px;
+$xl-width: 1280px;
+$xxl-width: 1536px;
+
+@for $i from 0 to 10 {
+    .e-top-$i {
+        @media (max-width: $md-width) {
+            top: calc(($i + 1) * var(--p-sm-height));
+            height: var(--p-sm-height);
+        }
+        @media (min-width: $md-width) and (max-width: $lg-width) {
+            top: calc(($i + 1) * var(--p-md-height));
+            height: var(--p-md-height);
+        }
+        @media (min-width: $lg-width) and (max-width: $xl-width) {
+            top: calc(($i + 1) * var(--p-lg-height));
+            height: var(--p-lg-height);
+        }
+        @media (min-width: $xl-width) and (max-width: $xxl-width) {
+            top: calc(($i + 1) * var(--p-xl-height));
+            height: var(--p-xl-height);
+        }
+        @media (min-width: $xxl-width)  {
+            top: calc(($i + 1) * var(--p-xxl-height));
+            height: var(--p-xxl-height);
+        }
+    }
+
+}
+
+@for $i from 0 to 40 {
+    .e-left-$i {
+        @media (max-width: $md-width) {
+            left: calc($i * var(--p-sm-width));
+            width: var(--p-sm-width);
+        }
+        @media (min-width: $md-width) and (max-width: $lg-width) {
+            left: calc($i * var(--p-md-width));
+            width: var(--p-md-width);
+        }
+        @media (min-width: $lg-width) and (max-width: $xl-width) {
+            left: calc($i * var(--p-lg-width));
+            width: var(--p-lg-width);
+        }
+        @media (min-width: $xl-width) and (max-width: $xxl-width) {
+            left: calc($i * var(--p-xl-width));
+            width: var(--p-xl-width);
+        }
+        @media (min-width: $xxl-width)  {
+            left: calc($i * var(--p-xxl-width));
+            width: var(--p-xxl-width);
+        }
+    }
+}
+

@@ -17,7 +17,7 @@ This version of my periodic table, (Currently found https://texteng.github.io/Pe
 * Moves many in browser calculations into a node script entering into a single master json file.  The original periodic table kept the original json files and handled everything in runtime. While the scss files from the original project remain, determining which classes get which colors are found in the master json file.
 
 ## Version 3 (Current)
-This version is a rewrite of the original periodic table. My goal in this project was to learn React and tailwind.css. I also learned how to use postcss and vite.
+This version is a rewrite of the original periodic table. My goal in this project was to learn React and tailwind.css. I also learned how to use postcss and vite. This project benefits from the  6+ years of development experience I have had since i programmed the original table.
 * Instead of using classes to determine color, the master json file has all of the colors. This removes the scss tricks i used in the first version, but greatly simplifies how the code works.
 * Bootstrap and Jquery have been completely removed and replaced with tailwind and react.
 * Element locations are on the master json file, not separate mapping files.

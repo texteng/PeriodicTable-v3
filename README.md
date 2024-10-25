@@ -15,6 +15,7 @@ This version of my periodic table, (Currently found https://texteng.github.io/Pe
 * It is written in typescript.
 * It removes most of the jquery using standard js methods
 * Moves many in browser calculations into a node script entering into a single master json file.  The original periodic table kept the original json files and handled everything in runtime. While the scss files from the original project remain, determining which classes get which colors are found in the master json file.
+* Gets rid of weird grid system
 
 ## Version 3 (Current)
 This version is a rewrite of the original periodic table. My goal in this project was to learn React and tailwind.css. I also learned how to use postcss and vite. This project benefits from the  6+ years of development experience I have had since i programmed the original table.
@@ -26,6 +27,7 @@ Additional improvements:
 * Hovering over elements, rows and column instead of highlighting the target elements, now increases the grayscale and decreases the opacity of surrounding elmeents
 * Newer versions of the json files i have used as references now return photos. these have been added to the element modals.
 * added the cpk color scheme which came from the source json files. and i am now using it as the default color scheme for the table.
+* Five media query breakpoints instead of 2.
 
 To Do
 * add the legend for the color schemes and the associated hover code.
@@ -38,7 +40,7 @@ To start dev environment, in the terminal
 2. `npm run dev`
 
 To modify the json file which the whole period table is based of
-1. Create two files, `src/json/pt_json1.json` and `src/json/pt_json2.json`
+1. Create two files, `src/utils/pt_json1.json` and `src/utils/pt_json2.json`
 2. Copy the contents of https://github.com/Bowserinator/Periodic-Table-JSON into pt_json1.json
 3. Copy the contents of https://github.com/neelpatel05/periodic-table-api into pt_json2.json
 4. Run the command `npm run build-json`

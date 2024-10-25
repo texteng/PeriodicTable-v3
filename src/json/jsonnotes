@@ -1,7 +1,0 @@
-sources of Periodic Table JSON files
-https://github.com/Bowserinator/Periodic-Table-JSON - pt_json1.json
-https://github.com/neelpatel05/periodic-table-api - pt_json2.json
-
-json_parser.cjs is created with node.js to parse source json file for table.
-
-to use, type in node json_parser.cjs

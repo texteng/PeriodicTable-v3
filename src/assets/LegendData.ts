@@ -1,4 +1,6 @@
-const Legends = {
+import { iLegendData } from "../schemas/LegendInterface";
+
+const LegendData: iLegendData = {
     "category": {
         "title": "Elemental Categories",
         "colors": [

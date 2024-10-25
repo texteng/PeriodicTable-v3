@@ -1,4 +1,6 @@
-export const GroupData: { groupNumber: number; title: string; yposition: number }[] = [
+import { iGroupData } from "../schemas/propInterfaces";
+
+export const GroupData: iGroupData[] = [
     { groupNumber: 1, title: "IA", yposition: 0 },
     { groupNumber: 2, title: "IIA", yposition: 1 },
     { groupNumber: 3, title: "IIIB", yposition: 3 },

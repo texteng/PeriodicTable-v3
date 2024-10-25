@@ -1,14 +1,6 @@
 import React from 'react';
 import './GroupLabel.css';
-
-interface iGroupLabelProps {
-  data: {
-    title: string;
-    groupNumber: number;
-    yposition: number;
-  };
-  hover: (groupHover: number) => void;
-}
+import { iGroupLabelProps } from '../schemas/propInterfaces';
 
 const GroupLabel: React.FC<iGroupLabelProps> = ({ data, hover }) => {
   const className = "element absolute text-center p-1 pt-2 hover:text-blue-600";

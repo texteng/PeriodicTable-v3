@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build-json": "node ./src/json/json_parser.cjs"
+    "build-json": "node ./src/utils/json_parser.cjs"
   },
   "dependencies": {
     "postcss-custom-properties": "^14.0.3",

@@ -7,30 +7,31 @@ var colorLibrary = require("./color_library.json");
 var isDarkColor = require("is-dark-color");
 var fs = require('fs');
 
-// console.log("Howdy", table1.elements[0]);
-
 function parseElements() {
     var firstJson = ParseJson1()
     return `
     import { iElement } from "../schemas/ElementInterface";
 
     const ElementData: iElement[] = 
-    ${ firstJson }
+    ${firstJson}
     export default ElementData;`;
 }
 
 function parseLegend() {
-    return "const Legends =" + JSON.stringify(colorLibrary, "    ", 4);
+    return `import { iLegendData } from "../schemas/LegendInterface";
+
+const LegendData: iLegendData= ${JSON.stringify(colorLibrary, "    ", 4)}
+`
 }
 // Missing Named by
 
-fs.writeFile("../assets/ElementData.ts", parseElements(), (error)=>{
-    if(error) throw error;
+fs.writeFile("../assets/ElementData.ts", parseElements(), (error) => {
+    if (error) throw error;
     console.log('Element Data complete');
 });
 
-fs.writeFile("../assets/LegendData.ts", parseLegend(), (error)=>{
-    if(error) throw error;
+fs.writeFile("../assets/LegendData.ts", parseLegend(), (error) => {
+    if (error) throw error;
     console.log('Legend Data complete');
 });
 
@@ -38,10 +39,7 @@ fs.writeFile("../assets/LegendData.ts", parseLegend(), (error)=>{
 function ParseJson1() {
     var elementArray = [];
     // first table has an extra element not found on the second one
-    for (var elementIndex = 0; elementIndex < table1.elements.length-1; elementIndex++) {
-        
-        // let table1.elements[elementIndex] = table1.elements[elementIndex];
-        // let table2[elementIndex] = table2[elementIndex];
+    for (var elementIndex = 0; elementIndex < table1.elements.length - 1; elementIndex++) {
         elementArray[elementIndex] = {
             "number": table1.elements[elementIndex].number,
             "name": table1.elements[elementIndex].name,
@@ -61,7 +59,7 @@ function ParseJson1() {
             "summary": table1.elements[elementIndex].summary,
             "electron_affinity": table1.elements[elementIndex].electron_affinity,
             "electronegativity": outputNull(table2[elementIndex].electronegativity),
-            "atomic_radius": outputNull(table2[elementIndex].atomicRadius) ,
+            "atomic_radius": outputNull(table2[elementIndex].atomicRadius),
             "ion_radius": outputNull(table2[elementIndex].ionRadius),
             "van_der_waals_radius": outputNull(table2[elementIndex].vanDelWaalsRadius),
             "ionization_energy": outputNull(table2[elementIndex].ionizationEnergy),
@@ -91,17 +89,16 @@ function outputNull(input) {
 }
 
 
-function capitalizeWords(str)
-{
+function capitalizeWords(str) {
     if (str == null) {
         return null;
     }
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 }
 
-var defaultColor = {hex: "#ffffff", dark: false};
+var defaultColor = { hex: "#ffffff", dark: false };
 function findColorAndDark(color) {
-    return color != null ? 
+    return color != null ?
         { hex: color, dark: isDarkColor(color) } :
         defaultColor;
 }
@@ -113,24 +110,23 @@ function findElementColors(elementInfo) {
     colorData["phase"] = findStringButtonColor("phase", elementInfo.phase);
     colorData["group_block"] = findStringButtonColor("group_block", elementInfo.group_block);
     colorData["bonding_type"] = findStringButtonColor("bonding_type", elementInfo.bonding_type);
-    colorData["year_discovered"]= findNumberButtonColor("year_discovered", elementInfo.year_discovered);
-    colorData["density"]= findNumberButtonColor("density", elementInfo.density);
-    colorData["melt"]= findNumberButtonColor("melt", elementInfo.melt);
-    colorData["boil"]= findNumberButtonColor("boil", elementInfo.boil);
-    colorData["molar_heat"]= findNumberButtonColor("molar_heat", elementInfo.molar_heat);
-    colorData["electronegativity"]= findNumberButtonColor("electronegativity", elementInfo.electronegativity);
-    colorData["atomic_radius"]= findNumberButtonColor("atomic_radius", elementInfo.atomic_radius);
-    colorData["van_der_waals_radius"]= findNumberButtonColor("van_der_waals_radius", elementInfo.van_der_waals_radius);
-    colorData["ionization_energy"]= findNumberButtonColor("ionization_energy", elementInfo.ionization_energy);
-    colorData["electron_affinity"]= findNumberButtonColor("electron_affinity", elementInfo.electron_affinity);
-    colorData["cpk"]= elementInfo['cpk-hex'] ? 
-        { hex: "#" + elementInfo['cpk-hex'], dark: isDarkColor("#" + elementInfo['cpk-hex']) } : 
+    colorData["year_discovered"] = findNumberButtonColor("year_discovered", elementInfo.year_discovered);
+    colorData["density"] = findNumberButtonColor("density", elementInfo.density);
+    colorData["melt"] = findNumberButtonColor("melt", elementInfo.melt);
+    colorData["boil"] = findNumberButtonColor("boil", elementInfo.boil);
+    colorData["molar_heat"] = findNumberButtonColor("molar_heat", elementInfo.molar_heat);
+    colorData["electronegativity"] = findNumberButtonColor("electronegativity", elementInfo.electronegativity);
+    colorData["atomic_radius"] = findNumberButtonColor("atomic_radius", elementInfo.atomic_radius);
+    colorData["van_der_waals_radius"] = findNumberButtonColor("van_der_waals_radius", elementInfo.van_der_waals_radius);
+    colorData["ionization_energy"] = findNumberButtonColor("ionization_energy", elementInfo.ionization_energy);
+    colorData["electron_affinity"] = findNumberButtonColor("electron_affinity", elementInfo.electron_affinity);
+    colorData["cpk"] = elementInfo['cpk-hex'] ?
+        { hex: "#" + elementInfo['cpk-hex'], dark: isDarkColor("#" + elementInfo['cpk-hex']) } :
         defaultColor;
     return colorData;
 }
 
 function findStringButtonColor(type, elementProperty) {
-    // console.log("type", type, "elementProperty", elementProperty);
     if (elementProperty !== null) {
         for (let property of colorLibrary[type].colors) {
             if (property.index == elementProperty) {
@@ -143,9 +139,9 @@ function findStringButtonColor(type, elementProperty) {
 
 function findNumberButtonColor(type, elementProperty) {
     if (elementProperty === null) return defaultColor;
-    if(elementProperty === NaN) return findStringButtonColor(type, elementProperty);
-    for(var property of colorLibrary[type].colors) {
-        if(property.index !== NaN && property.index >= elementProperty) {
+    if (elementProperty === NaN) return findStringButtonColor(type, elementProperty);
+    for (var property of colorLibrary[type].colors) {
+        if (property.index !== NaN && property.index >= elementProperty) {
             return findColorAndDark(property.color);
         }
     }

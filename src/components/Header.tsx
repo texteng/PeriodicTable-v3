@@ -1,13 +1,8 @@
 import React from 'react';
 import './Header.css';
+import { iHeaderProps } from '../schemas/propInterfaces';
 
-interface iAtomicHeaderProps {
-  colorIndex: string;
-  select: (colorIndex: string) => void;
-}
-
-
-const Header: React.FC<iAtomicHeaderProps> = ({ colorIndex, select }) => {
+const Header: React.FC<iHeaderProps> = ({ colorIndex, select }) => {
   const handleSelectColorIndex = (colorIndexSelection: string) => {
     select(colorIndexSelection);
   }

@@ -1,20 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { iElement } from '../schemas/ElementInterface';
 import './AtomicElement.css';
-
-
-interface iAtomicElementProps {
-  element: iElement;
-  obscure: {
-    periodHover: number;
-    groupHover: number;
-    elementHover: number;
-    otherElementHighlighted: boolean;
-  };
-  colorIndex: string;
-  hover: (elementHover: number) => void;
-  click: (currentElement: iElement) => void;
-}
+import { iAtomicElementProps } from '../schemas/propInterfaces';
 
 const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorIndex, hover, click }) => {
   const defalutBackgroundColor = { background: getBackgroundColor(colorIndex, element) };

@@ -1,10 +1,6 @@
 import React from 'react';
 import './PeriodLabel.css';
-
-export interface iPeriodLabelProps {
-  data: { periodNumber: number };
-  hover: (periodHover: number) => void;
-}
+import { iPeriodLabelProps } from '../schemas/propInterfaces';
 
 const PeriodLabel: React.FC<iPeriodLabelProps> = ({ data, hover }) => {
   const className = "align-middle element absolute text-center hover:text-blue-600";

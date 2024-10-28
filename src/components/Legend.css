@@ -1,0 +1,88 @@
+$sm-width: 640px;
+$md-width: 768px;
+$lg-width: 1024px;
+$xl-width: 1280px;
+$xxl-width: 1536px;   
+
+.l-top {
+    @media (max-width: $md-width) {
+        top: calc(var(--p-sm-height) * 12.5);
+    }
+    @media (min-width: $md-width) and (max-width: $lg-width) {
+        top: calc(var(--p-md-height) * 12.5);
+    }
+    @media (min-width: $lg-width) and (max-width: $xl-width) {
+        top: var(--p-lg-height);
+    }
+    @media (min-width: $xl-width) and (max-width: $xxl-width) {
+        top: var(--p-xl-height);
+    }
+    @media (min-width: $xxl-width)  {
+        top: var(--p-xxl-height);
+    }
+}
+
+.l-left {
+    @media (max-width: $md-width) {
+        left: var(--p-sm-width);
+        width: calc(18 * var(--p-sm-width));
+    }
+    @media (min-width: $md-width) and (max-width: $lg-width) {
+        left: var(--p-md-width);
+        width: calc(18 * var(--p-md-width));
+    }
+    @media (min-width: $lg-width) and (max-width: $xl-width) {
+        left: calc(3 * var(--p-lg-width));
+        width: calc(10 * var(--p-lg-width));
+    }
+    @media (min-width: $xl-width) and (max-width: $xxl-width) {
+        left: calc(3 * var(--p-xl-width));
+        width: calc(10 * var(--p-lg-width));
+    }
+    @media (min-width: $xxl-width)  {
+        left: calc(3 * var(--p-xxl-width));
+        width: calc(10 * var(--p-lg-width));
+    }
+}
+
+
+.l-height {
+    @media (max-width: $md-width) {
+        max-height: calc(calc(5 * var(--p-sm-height)) - 20px);
+    }
+    @media (min-width: $md-width) and (max-width: $lg-width) {
+        max-height: calc(calc(3 * var(--p-md-height)) - 20px);
+    }
+    @media (min-width: $lg-width) and (max-width: $xl-width) {
+        max-height: calc(calc(3 * var(--p-lg-height)) - 20px);
+    }
+    @media (min-width: $xl-width) and (max-width: $xxl-width) {
+        max-height: calc(calc(3 * var(--p-xl-height)) - 20px);
+    }
+    @media (min-width: $xxl-width)  {
+        max-height: calc(calc(3 * var(--p-xxl-height)) - 20px);
+    }
+}
+
+.color-box {
+    @media (max-width: $md-width) {
+        height: 20px; 
+        width: 20px;
+    }
+    @media (min-width: $md-width) and (max-width: $lg-width) {
+        height: 20px; 
+        width: 20px;
+    }
+    @media (min-width: $lg-width) and (max-width: $xl-width) {
+        height: 20px; 
+        width: 20px;
+    }
+    @media (min-width: $xl-width) and (max-width: $xxl-width) {
+        height: 20px; 
+        width: 20px;
+    }
+    @media (min-width: $xxl-width)  {
+        height: 20px; 
+        width: 20px;
+    }
+}

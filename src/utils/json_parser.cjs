@@ -20,7 +20,7 @@ function parseElements() {
 function parseLegend() {
     return `import { iLegendData } from "../schemas/LegendInterface";
 
-const LegendData: iLegendData= ${JSON.stringify(colorLibrary, "    ", 4)}
+export const LegendData: iLegendData= ${JSON.stringify(colorLibrary, "    ", 4)}
 `
 }
 // Missing Named by
@@ -120,6 +120,7 @@ function findElementColors(elementInfo) {
     colorData["van_der_waals_radius"] = findNumberButtonColor("van_der_waals_radius", elementInfo.van_der_waals_radius);
     colorData["ionization_energy"] = findNumberButtonColor("ionization_energy", elementInfo.ionization_energy);
     colorData["electron_affinity"] = findNumberButtonColor("electron_affinity", elementInfo.electron_affinity);
+    colorData["block"] = findStringButtonColor("block", elementInfo.block);
     colorData["cpk"] = elementInfo['cpk-hex'] ?
         { hex: "#" + elementInfo['cpk-hex'], dark: isDarkColor("#" + elementInfo['cpk-hex']) } :
         defaultColor;

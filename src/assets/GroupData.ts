@@ -1,4 +1,4 @@
-import { iGroupData } from "../schemas/propInterfaces";
+import { iGroupData } from "../schemas/PropInterfaces";
 
 export const GroupData: iGroupData[] = [
     { groupNumber: 1, title: "IA", yposition: 0 },

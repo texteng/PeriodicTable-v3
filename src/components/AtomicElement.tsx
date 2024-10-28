@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { iElement } from '../schemas/ElementInterface';
 import './AtomicElement.css';
-import { iAtomicElementProps } from '../schemas/propInterfaces';
+import { iAtomicElementProps } from '../schemas/PropInterfaces';
+
 
 const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorIndex, hover, click }) => {
-  const defalutBackgroundColor = { background: getBackgroundColor(colorIndex, element) };
+  const defaultBackgroundColor = { background: getBackgroundColor(colorIndex, element) };
   const defaultTextColor = { color: getTextColor(colorIndex, element) };
   const className = "element absolute text-center rounded-md p-1 border border-gray-400 hover:border-gray-600 hover:shadow-inner transition-opacity ease-in-out duration-100";
   const massNumber = renderMassNumber(element.atomic_mass);
@@ -13,9 +14,10 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   const defaultStyles = { filter: "grayscale(0%)", opacity: 1 };
   const obscureStyles = { filter: "grayscale(80%)", opacity: .25 };
 
-  const [style, setStyle] = useState({ ...defalutBackgroundColor, ...defaultTextColor, ...defaultStyles });
+  const [style, setStyle] = useState({ ...defaultBackgroundColor, ...defaultTextColor, ...defaultStyles });
   const [additionalInfo, setAdditionalInfo] = useState({ ...defaultAdditionalInfo });
 
+  const hideAdditionalInfoCategory = ['bonding_type', 'group_block', 'category', 'block' ];
 
   const handleHoverOver = () => hover(element.number);
   const handleHoverLeave = () => hover(0);
@@ -28,13 +30,14 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
     if (obscure.otherElementHighlighted &&
       obscure.periodHover !== element.period &&
       obscure.groupHover !== element.group &&
+      obscure.categoryHover !== getBackgroundColor(colorIndex, element) &&
       obscure.elementHover !== element.number
     ) {
       setStyle({ ...style, ...obscureStyles })
     } else {
       setStyle({ ...style, ...defaultStyles })
     }
-  }, [obscure]);
+  }, [obscure, colorIndex]);
 
   useEffect(() => {
     setStyle({
@@ -47,6 +50,15 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
     })
   }, [colorIndex]);
 
+  const getAdditionalInfo = function (colorIndex: string, element: iElement): string {
+    if (colorIndex === 'cpk') {
+      return renderMassNumber(element.atomic_mass);
+    } else if (hideAdditionalInfoCategory.includes(colorIndex)) {
+      return '';
+    }
+    // @ts-ignore;
+    return `${element[colorIndex] ?? ''}`;
+  }
 
   return (
     <div
@@ -88,15 +100,5 @@ const getTextColor = function (colorIndex: string, element: iElement) {
   const data = element.colors[colorIndex] ?? { hex: "#FFFFFF", dark: false };
   return data.dark ? "#FFFFFF" : "#000000";
 };
-
-const getAdditionalInfo = function (colorIndex: string, element: iElement): string {
-  if (colorIndex === 'cpk') {
-    return renderMassNumber(element.atomic_mass);
-  } else if (colorIndex === 'bonding_type' || colorIndex === 'group_block') {
-    return '';
-  }
-  // @ts-ignore;
-  return `${element[colorIndex] ?? ''}`;
-}
 
 export default AtomicElement;

@@ -8,6 +8,7 @@ import PeriodLabel from './components/PeriodLabel';
 import { useState } from 'react';
 import Modal from './components/Modal';
 import About from './components/About';
+import Legend from './components/Legend';
 import { iElement } from './schemas/ElementInterface';
 import Header from './components/Header';
 
@@ -17,15 +18,19 @@ function App() {
   const defaultPeriodHover = { periodHover: 0 };
   const defaultGroupHover = { groupHover: 0 };
   const defaultElementHover = { elementHover: 0 };
+  const defaultCategoryHover = { categoryHover: '' };
+
   const defaultCurrentElement = { currentElement: ElementData[0] };
   const defaultOtherElementHighlighted = { otherElementHighlighted: false };
   const defaultColorIndex = { colorIndex: 'cpk' };
 
   const [periodHover, setPeriodHover] = useState({ ...defaultPeriodHover });
   const [groupHover, setGroupHover] = useState({ ...defaultGroupHover });
+  const [categoryHover, setCategoryHover] = useState({ ...defaultCategoryHover });
   const [elementHover, setElementHover] = useState({ ...defaultElementHover });
   const [currentElement, setCurrentElement] = useState({ ...defaultCurrentElement });
   const [otherElementHighlighted, setOtherElementHighlighted] = useState({ ...defaultOtherElementHighlighted });
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [colorIndexData, setColorIndex] = useState({ ...defaultColorIndex });
 
@@ -63,7 +68,7 @@ function App() {
       if (ElementData[i]) {
         elements.push(<AtomicElement
           element={ElementData[i]}
-          obscure={{ ...periodHover, ...groupHover, ...elementHover, ...otherElementHighlighted }}
+          obscure={{ ...periodHover, ...groupHover, ...elementHover, ...categoryHover, ...otherElementHighlighted }}
           hover={handleHoverElement}
           click={handleSelectCurrentElement}
           colorIndex={colorIndexData.colorIndex}
@@ -84,6 +89,11 @@ function App() {
     setOtherElementHighlighted({ otherElementHighlighted: groupHover !== 0 })
   }
 
+  const handleHoverCategory = (categoryHover: string) => {
+    setCategoryHover({ categoryHover });
+    setOtherElementHighlighted({ otherElementHighlighted: categoryHover !== '' })
+  }
+
   const handleHoverElement = (elementHover: number) => {
     setElementHover({ elementHover });
     setOtherElementHighlighted({ otherElementHighlighted: elementHover !== 0 })
@@ -93,20 +103,30 @@ function App() {
     setColorIndex({ colorIndex });
   }
 
-
   const closeModal = () => setIsModalOpen(false);
+  const closeAboutModal = () => setIsAboutModalOpen(false);
+
   const handleSelectCurrentElement = (currentElement: iElement) => {
     setCurrentElement({ currentElement });
     setIsModalOpen(true);
   }
+
+  const handleAboutButtonClick = () => {
+    setIsAboutModalOpen(true);
+  }
+
   return (
     <div className="App">
-      <Header select={handleSelectColorIndex} colorIndex={colorIndexData.colorIndex} />
+      <Header 
+        select={handleSelectColorIndex} colorIndex={colorIndexData.colorIndex}
+        aboutButtonClick={handleAboutButtonClick}
+      />
       {renderGroupLabels()}
       {renderPeriodLabels()}
       {renderElements()}
+      <Legend colorIndex={colorIndexData.colorIndex} hover={handleHoverCategory}/>
       <Modal show={isModalOpen} onClose={closeModal} currentElement={currentElement.currentElement} />
-      <About></About>
+      <About show={isAboutModalOpen} onClose={closeAboutModal}/>
     </div>
   );
 }

@@ -1,9 +1,12 @@
+export interface iLegendCategory {
+    title: string
+    colors: {
+        index: string | number;
+        color: string;
+        displayName: string; 
+    }[]
+};
+
 export interface iLegendData {
-    [category: string]: {
-        title: string
-        colors: {
-            index: string | number
-            color: string
-        }[]
-    }
-}
+    [category: string]: iLegendCategory;
+};

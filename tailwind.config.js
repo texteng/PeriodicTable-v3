@@ -5,21 +5,25 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      borderWidth: {
+        '1': '1px'
+      }
+    },
   },
   plugins: [],
   mode: 'jit',
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-        ],
-      },
-    ],
-  }
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.scss$/,
+  //       use: [
+  //         'style-loader',
+  //         'css-loader',
+  //         'sass-loader',
+  //       ],
+  //     },
+  //   ],
+  // }
 }
 

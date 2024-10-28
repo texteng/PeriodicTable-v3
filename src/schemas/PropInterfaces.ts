@@ -6,6 +6,7 @@ export interface iAtomicElementProps {
         periodHover: number;
         groupHover: number;
         elementHover: number;
+        categoryHover: string;
         otherElementHighlighted: boolean;
     };
     colorIndex: string;
@@ -27,9 +28,15 @@ export interface iGroupLabelProps {
 export interface iHeaderProps {
     colorIndex: string;
     select: (colorIndex: string) => void;
+    aboutButtonClick: () => void;
 }
 
 export interface iPeriodLabelProps {
     data: { periodNumber: number };
     hover: (periodHover: number) => void;
+}
+
+export interface iLegendProps {
+    colorIndex: string;
+    hover: (categoryHover: string) => void;
 }

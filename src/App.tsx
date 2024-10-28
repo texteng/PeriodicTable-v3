@@ -11,6 +11,8 @@ import About from './components/About';
 import Legend from './components/Legend';
 import { iElement } from './schemas/ElementInterface';
 import Header from './components/Header';
+import LanthBlock from './components/LanthBlock';
+import ActinBlock from './components/ActinBlock';
 
 function App() {
 
@@ -19,6 +21,9 @@ function App() {
   const defaultGroupHover = { groupHover: 0 };
   const defaultElementHover = { elementHover: 0 };
   const defaultCategoryHover = { categoryHover: '' };
+  const defaultLanthHover = { lanthHover: false };
+  const defaultActinHover = { actinHover: false };
+
 
   const defaultCurrentElement = { currentElement: ElementData[0] };
   const defaultOtherElementHighlighted = { otherElementHighlighted: false };
@@ -28,6 +33,10 @@ function App() {
   const [groupHover, setGroupHover] = useState({ ...defaultGroupHover });
   const [categoryHover, setCategoryHover] = useState({ ...defaultCategoryHover });
   const [elementHover, setElementHover] = useState({ ...defaultElementHover });
+  const [lanthHover, setLanthHover] = useState({ ...defaultLanthHover });
+  const [actinHover, setActinHover] = useState({ ...defaultActinHover });
+
+
   const [currentElement, setCurrentElement] = useState({ ...defaultCurrentElement });
   const [otherElementHighlighted, setOtherElementHighlighted] = useState({ ...defaultOtherElementHighlighted });
   const [isAboutModalOpen, setIsAboutModalOpen] = useState<boolean>(false);
@@ -68,7 +77,15 @@ function App() {
       if (ElementData[i]) {
         elements.push(<AtomicElement
           element={ElementData[i]}
-          obscure={{ ...periodHover, ...groupHover, ...elementHover, ...categoryHover, ...otherElementHighlighted }}
+          obscure={{ 
+            ...periodHover,
+            ...groupHover,
+            ...elementHover,
+            ...categoryHover,
+            ...lanthHover,
+            ...actinHover,
+            ...otherElementHighlighted
+          }}
           hover={handleHoverElement}
           click={handleSelectCurrentElement}
           colorIndex={colorIndexData.colorIndex}
@@ -99,6 +116,16 @@ function App() {
     setOtherElementHighlighted({ otherElementHighlighted: elementHover !== 0 })
   }
 
+  const handleHoverLanth = (lanthHover: boolean) => {
+    setLanthHover({ lanthHover });
+    setOtherElementHighlighted({ otherElementHighlighted: lanthHover })
+  }
+
+  const handleHoverActin = (actinHover: boolean) => {
+    setActinHover({ actinHover });
+    setOtherElementHighlighted({ otherElementHighlighted: actinHover })
+  }
+
   const handleSelectColorIndex = (colorIndex: string) => {
     setColorIndex({ colorIndex });
   }
@@ -124,6 +151,16 @@ function App() {
       {renderGroupLabels()}
       {renderPeriodLabels()}
       {renderElements()}
+      <LanthBlock
+          obscure={{ ...periodHover, ...groupHover, ...elementHover, ...categoryHover, ...lanthHover, ...actinHover, ...otherElementHighlighted }}
+          hover={ handleHoverLanth }
+          colorIndex={colorIndexData.colorIndex}
+      />
+      <ActinBlock
+          obscure={{ ...periodHover, ...groupHover, ...elementHover, ...categoryHover, ...lanthHover, ...actinHover, ...otherElementHighlighted }}
+          hover={ handleHoverActin }
+          colorIndex={colorIndexData.colorIndex}
+      />
       <Legend colorIndex={colorIndexData.colorIndex} hover={handleHoverCategory}/>
       <Modal show={isModalOpen} onClose={closeModal} currentElement={currentElement.currentElement} />
       <About show={isAboutModalOpen} onClose={closeAboutModal}/>

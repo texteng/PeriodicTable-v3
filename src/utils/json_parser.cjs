@@ -105,7 +105,6 @@ function findColorAndDark(color) {
 
 function findElementColors(elementInfo) {
     let colorData = {};
-    // console.log(elementInfo);
     colorData["category"] = findStringButtonColor("category", elementInfo.category);
     colorData["phase"] = findStringButtonColor("phase", elementInfo.phase);
     colorData["group_block"] = findStringButtonColor("group_block", elementInfo.group_block);

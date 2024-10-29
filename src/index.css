@@ -38,9 +38,14 @@ $xxl-width: 1536px;
             height: var(--p-xxl-height);
         }
     }
+
+    .ew-top-$i {
+        top: calc(($i + 1) * var(--p-sm-height));
+        height: var(--p-sm-height);
+    }
 }
 
-@for $i from 0 to 40 {
+@for $i from 0 to 22 {
     .e-left-$i {
         @media (max-width: $md-width) {
             left: calc($i * var(--p-sm-width));
@@ -65,3 +70,9 @@ $xxl-width: 1536px;
     }
 }
 
+@for $i from 0 to 40 {
+    .ew-left-$i {
+        left: calc($i * var(--p-sm-width));
+        width: var(--p-sm-width);
+    }
+}

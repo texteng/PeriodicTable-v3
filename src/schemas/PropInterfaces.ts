@@ -4,6 +4,7 @@ export interface iAtomicElementProps {
     element: iElement;
     obscure: obscure;
     colorIndex: string;
+    wide: boolean;
     hover: (elementHover: number) => void;
     click: (currentElement: iElement) => void;
 }
@@ -32,6 +33,7 @@ export interface iGroupLabelProps {
         groupNumber: number;
         yposition: number;
     };
+    wide: boolean;
     hover: (groupHover: number) => void;
 }
 
@@ -39,14 +41,18 @@ export interface iHeaderProps {
     colorIndex: string;
     select: (colorIndex: string) => void;
     aboutButtonClick: () => void;
+    wideButtonClick: () => void;
+    wide: boolean;
 }
 
 export interface iPeriodLabelProps {
     data: { periodNumber: number };
+    wide: boolean;
     hover: (periodHover: number) => void;
 }
 
 export interface iLegendProps {
     colorIndex: string;
+    wide: boolean;
     hover: (categoryHover: string) => void;
 }

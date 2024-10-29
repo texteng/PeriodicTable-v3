@@ -44,12 +44,11 @@ const About: React.FC<ModalProps> = ({ show, onClose }) => {
         <hr />
         <div className='p-5'>
           <p>This Periodic Table was meant to be tech demo only. Not used for actual chemists.</p>
-          <p>The source of the data from this table come from:
-            <ul className='list-disc p-5'>
-              <li><a className="hover:text-blue-600" href="https://github.com/Bowserinator/Periodic-Table-JSON">https://github.com/Bowserinator/Periodic-Table-JSON</a></li>
-              <li><a className="hover:text-blue-600" href="https://github.com/neelpatel05/periodic-table-api">https://github.com/neelpatel05/periodic-table-api</a></li>
-            </ul>
-          </p>
+          The source of the data from this table come from:
+          <ul className='list-disc p-5'>
+            <li><a className="hover:text-blue-600" href="https://github.com/Bowserinator/Periodic-Table-JSON">https://github.com/Bowserinator/Periodic-Table-JSON</a></li>
+            <li><a className="hover:text-blue-600" href="https://github.com/neelpatel05/periodic-table-api">https://github.com/neelpatel05/periodic-table-api</a></li>
+          </ul>
           <p>This Periodic Table was Created by Stephen Teng.</p>
         </div>
       </div>

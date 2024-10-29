@@ -4,10 +4,9 @@ import './AtomicElement.css';
 import { iAtomicElementProps } from '../schemas/PropInterfaces';
 
 
-const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorIndex, hover, click }) => {
+const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorIndex, wide, hover, click }) => {
   const defaultBackgroundColor = { background: getBackgroundColor(colorIndex, element) };
   const defaultTextColor = { color: getTextColor(colorIndex, element) };
-  const className = "element absolute text-center rounded-md p-1 border border-gray-400 hover:border-gray-600 hover:shadow-inner transition-opacity ease-in-out duration-100";
   const massNumber = renderMassNumber(element.atomic_mass);
   const defaultAdditionalInfo = { info: massNumber }
 
@@ -25,6 +24,35 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   const handleClick = () => {
     return click(element)
   }
+
+  const baseClasses = () => {
+    const standardClasses = `element absolute text-center rounded-md p-1 border border-gray-400 hover:border-gray-600 hover:shadow-inner transition-opacity ease-in-out duration-100 px-0 shadow-xl`;
+    return wide ? standardClasses : standardClasses + " md:py-2 lg:py-1";
+
+  }
+
+  const positionClasses = () => {
+    return !wide ? `e-top-${element.ypos} e-left-${element.xpos}` : `ew-top-${element.wypos} ew-left-${element.wxpos}`;
+  }
+
+  const renderInterFields = () => {
+    const elements = [];
+    
+    if (wide) {
+      return [ <span className='text-xl block element-symbol p-0'>{element.symbol}</span> ];
+    }
+    
+    if (!wide) {
+      elements.push(
+        <span className='text-xs hidden lg:block xl:block 2xl:block leading-3'>{element.number}</span>,
+        <span className='text-xl sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-3xl block element-symbol p-0'>{element.symbol}</span>,
+        <span key='additional' className='text-xs 2xl:text-sm hidden lg:block xl:block 2xl:block additional-info font-bold leading-3 p-0'>{additionalInfo.info}</span>,
+        <span key='name' className='tracking-tighter hidden text-xs 2xl:block xl:block tracking-narrow element-name'>{element.name}</span>
+      )
+    }
+    return elements
+  }
+
 
   useEffect(() => {
     if (obscure.otherElementHighlighted) {
@@ -71,16 +99,13 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
 
   return (
     <div
-      className={className + ` e-top-${element.ypos} e-left-${element.xpos} md:py-2 lg:py-1 px-0 shadow-xl`}
+      className={baseClasses() + ' ' + positionClasses() }
       style={style}
       onMouseOver={() => handleHoverOver()}
       onMouseLeave={() => handleHoverLeave()}
       onClick={() => handleClick()}
     >
-      <span className='text-xs hidden lg:block xl:block 2xl:block leading-3'>{element.number}</span>
-      <span className='text-xl sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-3xl block element-symbol p-0'>{element.symbol}</span>
-      <span className='text-xs 2xl:text-sm hidden lg:block xl:block 2xl:block additional-info font-bold leading-3 p-0'>{additionalInfo.info}</span>
-      <span className='tracking-tighter hidden text-xs 2xl:block xl:block tracking-narrow element-name'>{element.name}</span>
+      {renderInterFields()}
     </div>
   );
 

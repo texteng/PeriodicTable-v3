@@ -1,20 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import { iHeaderProps } from '../schemas/PropInterfaces';
 
-const Header: React.FC<iHeaderProps> = ({ colorIndex, select, aboutButtonClick: aboutButtonClick }) => {
+const Header: React.FC<iHeaderProps> = ({ colorIndex, wide, select, aboutButtonClick, wideButtonClick }) => {
   const handleSelectColorIndex = (colorIndexSelection: string) => {
     select(colorIndexSelection);
+  }
+  const [isWide, setIsWide] = useState<boolean>(false);
+
+  const handleWideButtonClick = () => {
+    setIsWide(!isWide);
+    wideButtonClick();
   }
 
   const handleAboutButtonClick = () => {
     aboutButtonClick();
   }
 
+  const renderHeaderContainerClasses = () => {
+    const baseClasses = 'header-container bg-slate-800 px-2 py-2 text-white grid grid-cols-14';
+    if (wide) {
+      return baseClasses;
+    }
+    return `${baseClasses} md:py-3 lg:py-4`
+  }
+
+  const renderTitleClasses = () => {
+    const baseClasses = 'text-sm col';
+    return wide ? baseClasses : `${baseClasses} md:text-base xl:text-xl`
+  }
+
+  const renderSelectorClasses = () => {
+    const baseClasses = 'col-start-13 text-sm';
+    return wide ? baseClasses : `${baseClasses} md:text-base xl:text-xl`;
+  }
+
   return (
-    <div className='bg-slate-800 px-2 py-2 md:py-3 lg:py-4 text-white grid grid-cols-14'>
-      <div className='text-sm md:text-base xl:text-xl col'>Periodic Table of Elements</div>
-      <div className="col-start-13 text-sm md:text-base xl:text-xl">
+    <div className={ renderHeaderContainerClasses() }>
+      <div className={ renderTitleClasses() }>Periodic Table of Elements</div>
+      <div className={ renderSelectorClasses() } >
         <div id="color-options" className='place-self-end inline-block'>
           <label htmlFor="color-index" className="mr-6">Pick Color Type</label>
           <select name="color-index"
@@ -40,6 +64,13 @@ const Header: React.FC<iHeaderProps> = ({ colorIndex, select, aboutButtonClick: 
             <option value="year_discovered">Year Discovered</option>
           </select>
         </div>
+        <button 
+          id="about-button"
+          className="inline-block place-self-end ml-3 bg-gray-700 hover:bg-gray-500 rounded px-3 py-2 my-[-10px]"
+          onClick={() => handleWideButtonClick()}
+        >
+          { isWide ? 'Standard' : 'Wide' }
+        </button>
         <button 
           id="about-button"
           className="inline-block place-self-end ml-3 bg-gray-700 hover:bg-gray-500 rounded px-3 py-2 my-[-10px]"

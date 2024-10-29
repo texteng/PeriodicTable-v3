@@ -1,3 +1,7 @@
 .group-roman-numeral {
     font-family: "Times New Roman", Times, serif;
 }
+
+.header-container {
+    min-width: 670px;
+}

@@ -24,7 +24,6 @@ function App() {
   const defaultLanthHover = { lanthHover: false };
   const defaultActinHover = { actinHover: false };
 
-
   const defaultCurrentElement = { currentElement: ElementData[0] };
   const defaultOtherElementHighlighted = { otherElementHighlighted: false };
   const defaultColorIndex = { colorIndex: 'cpk' };
@@ -36,12 +35,13 @@ function App() {
   const [lanthHover, setLanthHover] = useState({ ...defaultLanthHover });
   const [actinHover, setActinHover] = useState({ ...defaultActinHover });
 
-
   const [currentElement, setCurrentElement] = useState({ ...defaultCurrentElement });
   const [otherElementHighlighted, setOtherElementHighlighted] = useState({ ...defaultOtherElementHighlighted });
+  const [colorIndexData, setColorIndex] = useState({ ...defaultColorIndex });
+  
   const [isAboutModalOpen, setIsAboutModalOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [colorIndexData, setColorIndex] = useState({ ...defaultColorIndex });
+  const [isWide, setIsWide] = useState<boolean>(false);
 
   const renderGroupLabels = () => {
     const headerArr = [];
@@ -51,6 +51,7 @@ function App() {
           data={{ ...GroupData[i] }}
           hover={handleHoverGroup}
           key={i}
+          wide={ isWide }
         />
       )
     }
@@ -65,6 +66,7 @@ function App() {
           data={{ periodNumber: i }}
           hover={handleHoverPeriod}
           key={i}
+          wide={ isWide }
         />
       )
     }
@@ -89,9 +91,31 @@ function App() {
           hover={handleHoverElement}
           click={handleSelectCurrentElement}
           colorIndex={colorIndexData.colorIndex}
+          wide={isWide}
           key={i}
         />)
       }
+    }
+    return elements;
+  }
+
+  const renderLanthAndActinBlocks = () => {
+    const elements = [];
+    if (!isWide) {
+      elements.push(
+        <LanthBlock
+            obscure={{ ...periodHover, ...groupHover, ...elementHover, ...categoryHover, ...lanthHover, ...actinHover, ...otherElementHighlighted }}
+            hover={ handleHoverLanth }
+            colorIndex={colorIndexData.colorIndex}
+            key={'lanth'}
+        />,
+        <ActinBlock
+          obscure={{ ...periodHover, ...groupHover, ...elementHover, ...categoryHover, ...lanthHover, ...actinHover, ...otherElementHighlighted }}
+          hover={ handleHoverActin }
+          colorIndex={colorIndexData.colorIndex}
+          key={'actin'}
+      />
+      )
     }
     return elements;
   }
@@ -142,26 +166,23 @@ function App() {
     setIsAboutModalOpen(true);
   }
 
+  const handleWideButtonClick = () => {
+    setIsWide(!isWide);
+  }
+
   return (
     <div className="App">
       <Header 
         select={handleSelectColorIndex} colorIndex={colorIndexData.colorIndex}
         aboutButtonClick={handleAboutButtonClick}
+        wide={isWide}
+        wideButtonClick={handleWideButtonClick}
       />
       {renderGroupLabels()}
       {renderPeriodLabels()}
       {renderElements()}
-      <LanthBlock
-          obscure={{ ...periodHover, ...groupHover, ...elementHover, ...categoryHover, ...lanthHover, ...actinHover, ...otherElementHighlighted }}
-          hover={ handleHoverLanth }
-          colorIndex={colorIndexData.colorIndex}
-      />
-      <ActinBlock
-          obscure={{ ...periodHover, ...groupHover, ...elementHover, ...categoryHover, ...lanthHover, ...actinHover, ...otherElementHighlighted }}
-          hover={ handleHoverActin }
-          colorIndex={colorIndexData.colorIndex}
-      />
-      <Legend colorIndex={colorIndexData.colorIndex} hover={handleHoverCategory}/>
+      {renderLanthAndActinBlocks()}
+      <Legend colorIndex={colorIndexData.colorIndex} hover={handleHoverCategory} wide={isWide}/>
       <Modal show={isModalOpen} onClose={closeModal} currentElement={currentElement.currentElement} />
       <About show={isAboutModalOpen} onClose={closeAboutModal}/>
     </div>
@@ -169,4 +190,3 @@ function App() {
 }
 
 export default App;
-

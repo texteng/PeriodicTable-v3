@@ -73,6 +73,7 @@ function ParseJson1() {
             "block": table1.elements[elementIndex]?.block,
             "bohr_model_image": table1.elements[elementIndex].bohr_model_image,
             "bohr_model_3d": table1.elements[elementIndex].bohr_model_3d,
+            "spectral_image": table1.elements[elementIndex]?.spectral_img ?? null,
             "electron_configuration": table1.elements[elementIndex].electron_configuration_semantic,
             "xpos": table1.elements[elementIndex].xpos,
             "ypos": table1.elements[elementIndex].ypos,

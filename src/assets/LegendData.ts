@@ -270,47 +270,47 @@ export const LegendData: iLegendData= {
         "colors": [
             {
                 "index": 50,
-                "displayName": "50",
+                "displayName": "50 K",
                 "color": "#2c0720"
             },
             {
                 "index": 100,
-                "displayName": "100",
+                "displayName": "100 K",
                 "color": "#550d59"
             },
             {
                 "index": 250,
-                "displayName": "250",
+                "displayName": "250 K",
                 "color": "#541287"
             },
             {
                 "index": 273,
-                "displayName": "273",
+                "displayName": "273 K",
                 "color": "#3416b6"
             },
             {
                 "index": 374,
-                "displayName": "374",
+                "displayName": "374 K",
                 "color": "#1a42e6"
             },
             {
                 "index": 500,
-                "displayName": "500",
+                "displayName": "500 K",
                 "color": "#45a7ed"
             },
             {
                 "index": 1000,
-                "displayName": "1000",
+                "displayName": "1000 K",
                 "color": "#72eef3"
             },
             {
                 "index": 2000,
-                "displayName": "2000",
+                "displayName": "2000 K",
                 "color": "#a0f8d9"
             },
             {
                 "index": 4000,
-                "displayName": "4000",
+                "displayName": "4000 K",
                 "color": "#cffcdb"
             },
             {

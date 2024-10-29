@@ -12,18 +12,6 @@ export default {
     },
   },
   plugins: [],
-  mode: 'jit',
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.scss$/,
-  //       use: [
-  //         'style-loader',
-  //         'css-loader',
-  //         'sass-loader',
-  //       ],
-  //     },
-  //   ],
-  // }
+  mode: 'jit'
 }
 

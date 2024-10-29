@@ -49,6 +49,7 @@ const About: React.FC<ModalProps> = ({ show, onClose }) => {
             <li><a className="hover:text-blue-600" href="https://github.com/Bowserinator/Periodic-Table-JSON">https://github.com/Bowserinator/Periodic-Table-JSON</a></li>
             <li><a className="hover:text-blue-600" href="https://github.com/neelpatel05/periodic-table-api">https://github.com/neelpatel05/periodic-table-api</a></li>
           </ul>
+          <p><a href="https://github.com/texteng/PeriodicTable-v3">Github repo</a></p>
           <p>This Periodic Table was Created by Stephen Teng.</p>
         </div>
       </div>

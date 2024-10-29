@@ -26,13 +26,9 @@ This version is a rewrite of the original periodic table. My goal in this projec
 Additional improvements:
 * Hovering over elements, rows and column instead of highlighting the target elements, now increases the grayscale and decreases the opacity of surrounding elmeents
 * Newer versions of the json files i have used as references now return photos. these have been added to the element modals.
-* added the cpk color scheme which came from the source json files. and i am now using it as the default color scheme for the table.
-* Five media query breakpoints instead of 2.
-
-To Do
-* add the legend for the color schemes and the associated hover code.
-* Add wide mode
-* Add the special lanthanideas and the actinide tiles
+* Added the cpk color scheme, and blocks color schemes which came from the source json files. and i am now using it as the default color scheme for the table.
+* This page now has five media query breakpoints instead of 2.
+* Images of the elements are found in them modal
 
 To set up
 To start dev environment, in the terminal

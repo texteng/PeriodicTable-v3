@@ -35,6 +35,7 @@ export interface iElement {
     };
     bohr_model_image: string;
     bohr_model_3d: string;
+    spectral_image: string | null;
     block: string;
     xpos: number;
     ypos: number;

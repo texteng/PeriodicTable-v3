@@ -38,10 +38,9 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, currentElement }) => {
     return null;
   }
 
-
   return (
-    <div className="modal-overlay grid" onClick={handleOverlayClick}>
-      <div className='modal-content place-self-center'>
+    <div className="bg-black bg-opacity-50 w-screen h-screen top-0	left-0 grid justify-center items-center fixed" onClick={handleOverlayClick}>
+      <div className='w-[80vw] bg-white rounded-2xl	place-self-center max-w-full text-left'>
         <h2 className='text-3xl p-4'>{currentElement.name} ({currentElement.symbol})</h2>
         <hr />
         <div className='p-5'>

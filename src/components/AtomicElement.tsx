@@ -16,7 +16,8 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   const [style, setStyle] = useState({ ...defaultBackgroundColor, ...defaultTextColor, ...defaultStyles });
   const [additionalInfo, setAdditionalInfo] = useState({ ...defaultAdditionalInfo });
 
-  const hideAdditionalInfoCategory = ['bonding_type', 'group_block', 'category', 'block' ];
+  const hideAdditionalInfoCategory = ['bonding_type', 'block', 'phase' ];
+  const showMassAsAdditionalCategory = ['cpk', 'group_block', 'category']
 
   const handleHoverOver = () => hover(element.number);
   const handleHoverLeave = () => hover(0);
@@ -39,15 +40,15 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
     const elements = [];
     
     if (wide) {
-      return [ <span className='text-xl block element-symbol p-0'>{element.symbol}</span> ];
+      return <span key={`w-symbol-${element.symbol}`} className='text-xl block element-symbol p-0'>{element.symbol}</span>;
     }
     
     if (!wide) {
       elements.push(
-        <span className='text-xs hidden lg:block xl:block 2xl:block leading-3'>{element.number}</span>,
-        <span className='text-xl sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-3xl block element-symbol p-0'>{element.symbol}</span>,
-        <span key='additional' className='text-xs 2xl:text-sm hidden lg:block xl:block 2xl:block additional-info font-bold leading-3 p-0'>{additionalInfo.info}</span>,
-        <span key='name' className='tracking-tighter hidden text-xs 2xl:block xl:block tracking-narrow element-name'>{element.name}</span>
+        <span key={`number-${element.number}`} className='text-xs hidden lg:block xl:block 2xl:block leading-3'>{element.number}</span>,
+        <span key={`symbol-${element.symbol}`} className='text-xl sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-3xl block element-symbol p-0'>{element.symbol}</span>,
+        <span key={`additional-${element.number}`} className='text-xs 2xl:text-sm hidden lg:block xl:block 2xl:block additional-info font-bold leading-3 p-0'>{additionalInfo.info}</span>,
+        <span key={`name-${element.name}`} className='tracking-tighter hidden text-xs 2xl:block xl:block tracking-narrow element-name'>{element.name}</span>
       )
     }
     return elements
@@ -88,7 +89,7 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   }, [colorIndex]);
 
   const getAdditionalInfo = function (colorIndex: string, element: iElement): string {
-    if (colorIndex === 'cpk') {
+    if (showMassAsAdditionalCategory.includes(colorIndex)) {
       return renderMassNumber(element.atomic_mass);
     } else if (hideAdditionalInfoCategory.includes(colorIndex)) {
       return '';

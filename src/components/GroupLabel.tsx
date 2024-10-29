@@ -20,10 +20,6 @@ const GroupLabel: React.FC<iGroupLabelProps> = ({ data, wide, hover }) => {
     return wide ? baseClasses : `${baseClasses} lg:text-xl xl:text-2xl 2xl:text-3xl`;
   }
 
-  const renderTitle = () => {
-    return wide ? [] : [<span className='hidden md:text-xs lg:text-sm md:block xl:text-lg 2xl:text-2xl group-roman-numeral'>{ data.title }</span>];
-  }
-
   return (
     <div
       className={renderContainerClasses()}
@@ -32,7 +28,7 @@ const GroupLabel: React.FC<iGroupLabelProps> = ({ data, wide, hover }) => {
     >
       <a href={`https://www.wikipedia.com/wiki/Group_${data.groupNumber}_element`} target="_blank">
         <span className={renderGroupNumberClasses()}>{data.groupNumber}</span>
-        { renderTitle() }
+        { wide ? '' : <span className='hidden md:text-xs lg:text-sm md:block xl:text-lg 2xl:text-2xl font-serif'>{ data.title }</span> }
       </a>
 
     </div>

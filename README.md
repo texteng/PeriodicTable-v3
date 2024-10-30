@@ -4,7 +4,9 @@ Note, this periodic table is only meant to be a technical demonstration. It is n
 For these resources see:
 * https://ptable.com/
 * https://www.fishersci.com/us/en/periodic-table.html
-
+* https://www.rsc.org/periodic-table
+* https://inl.gov/periodic-table/
+* https://pubchem.ncbi.nlm.nih.gov/periodic-table/
 
 ## Version 1- https://github.com/texteng/texteng.github.io/tree/master/PeriodicTable
 This version was hacked together during my coding bootcamp. It uses a combination of bootstrap 4, jquery, and scss compiled into javascript, css, and html.

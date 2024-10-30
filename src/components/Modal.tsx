@@ -39,8 +39,8 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, currentElement }) => {
   }
 
   return (
-    <div className="bg-black bg-opacity-50 w-screen h-screen top-0	left-0 grid justify-center items-center fixed" onClick={handleOverlayClick}>
-      <div className='w-[80vw] bg-white rounded-2xl	place-self-center max-w-full text-left'>
+    <div className="bg-black bg-opacity-50 w-screen h-screen top-0 left-0 grid justify-center items-center fixed" onClick={handleOverlayClick}>
+      <div className='w-[80vw] bg-white rounded-2xl place-self-center max-w-full text-left'>
         <h2 className='text-3xl p-4'>{currentElement.name} ({currentElement.symbol})</h2>
         <hr />
         <div className='p-5'>
@@ -71,11 +71,12 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, currentElement }) => {
             <li><span className='font-bold'>Atomic Number:</span> {currentElement.number}</li>
             <li><span className='font-bold'>Category:</span> {currentElement.category}</li>
             <li><span className='font-bold'>Atomic Mass (amu):</span> {currentElement.atomic_mass}</li>
+            <li><span className='font-bold'>Electron Configuration:</span> {formatElectronConfiguration(currentElement.electron_configuration)}</li>
             {/* <li><span className='font-bold'>Electron Configuration:</span> {currentElement.electron_configuration}</li> */}
             {currentElement.appearance !== null && (<li><span className='font-bold'>Appearance:</span> {currentElement.appearance}</li>)}
             <li><span className='font-bold'>Phase (Room Temperature):</span> {currentElement.phase}</li>
-            {currentElement.boil !== null && (<li><span className='font-bold'>Boiling Point:</span> {currentElement.boil} °K</li>)}
-            {currentElement.melt !== null && (<li><span className='font-bold'>Melting Point:</span> {currentElement.melt} °K</li>)}
+            {currentElement.boil !== null && (<li><span className='font-bold'>Boiling Point:</span> {currentElement.boil} K</li>)}
+            {currentElement.melt !== null && (<li><span className='font-bold'>Melting Point:</span> {currentElement.melt} K</li>)}
             {currentElement.molar_heat !== null && (<li><span className='font-bold'>Molar Heat:</span> {currentElement.melt} °C</li>)}
             {currentElement.density !== null && (<li><span className='font-bold'>Density:</span> {currentElement.density} g/L</li>)}
             {currentElement.electronegativity !== null && (<li><span className='font-bold'>Electronegativity:</span> {currentElement.electronegativity}</li>)}
@@ -96,5 +97,13 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, currentElement }) => {
     </div>
   );
 };
+
+const superscriptMap: { [key: string]: string } = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' } as const;
+function formatElectronConfiguration(input: string): string {
+    return input.replace(/([spdf])(\d+)/g, (_match, orbital, digits) => {
+      const superscriptDigits = digits.split('').map((digit: string) => superscriptMap[digit]).join('');
+      return `${orbital}${superscriptDigits}`;
+    });
+}
 
 export default Modal;

@@ -16,8 +16,8 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   const [style, setStyle] = useState({ ...defaultBackgroundColor, ...defaultTextColor, ...defaultStyles });
   const [additionalInfo, setAdditionalInfo] = useState({ ...defaultAdditionalInfo });
 
-  const hideAdditionalInfoCategory = ['bonding_type', 'block', 'phase' ];
-  const showMassAsAdditionalCategory = ['cpk', 'group_block', 'category']
+  const hideAdditionalInfoCategory = new Set(['bonding_type', 'block', 'phase' ]);
+  const showMassAsAdditionalCategory = new Set(['cpk', 'group_block', 'category']);
 
   const handleHoverOver = () => hover(element.number);
   const handleHoverLeave = () => hover(0);
@@ -89,9 +89,9 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   }, [colorIndex]);
 
   const getAdditionalInfo = function (colorIndex: string, element: iElement): string {
-    if (showMassAsAdditionalCategory.includes(colorIndex)) {
+    if (showMassAsAdditionalCategory.has(colorIndex)) {
       return renderMassNumber(element.atomic_mass);
-    } else if (hideAdditionalInfoCategory.includes(colorIndex)) {
+    } else if (hideAdditionalInfoCategory.has(colorIndex)) {
       return '';
     }
     // @ts-ignore;

@@ -74,7 +74,7 @@ function ParseJson1() {
             "bohr_model_image": table1.elements[elementIndex].bohr_model_image,
             "bohr_model_3d": table1.elements[elementIndex].bohr_model_3d,
             "spectral_image": table1.elements[elementIndex]?.spectral_img ?? null,
-            "electron_configuration": table1.elements[elementIndex].electron_configuration_semantic,
+            "electron_configuration": formatElectronConfiguration(table1.elements[elementIndex].electron_configuration_semantic),
             "xpos": table1.elements[elementIndex].xpos,
             "ypos": table1.elements[elementIndex].ypos,
             "wxpos": table1.elements[elementIndex].wxpos,
@@ -149,3 +149,10 @@ function findNumberButtonColor(type, elementProperty) {
     return defaultColor;
 }
 
+function formatElectronConfiguration(input) {
+    const superscriptMap = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' };
+    return input.replace(/([spdf])(\d+)/g, (_match, orbital, digits) => {
+      const superscriptDigits = digits.split('').map((digit) => superscriptMap[digit]).join('');
+      return `${orbital}${superscriptDigits}`;
+    });
+}

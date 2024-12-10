@@ -15,7 +15,7 @@ const ActinBlock: React.FC<iLanthAndActinProps> = ({ obscure, colorIndex, hover 
 
   const handleHoverOver = () => hover(true);
   const handleHoverLeave = () => hover(false);
-  const colorIndexChangeList = ['group_block', 'category']
+  const colorIndexChangeList = new Set(['group_block', 'category']);
 
   useEffect(() => {
     if (obscure.actinHover) {
@@ -41,15 +41,13 @@ const ActinBlock: React.FC<iLanthAndActinProps> = ({ obscure, colorIndex, hover 
   }, [colorIndex]);
 
   const getBackgroundColor = function (colorIndex: string) {
-    // const data = { hex: "#FFFFFF", dark: false };
-    return colorIndexChangeList.includes(colorIndex) ? 
+    return colorIndexChangeList.has(colorIndex) ? 
       ElementData[88].colors[colorIndex].hex :
       "rgb(211,211,211)";
   };
   
   const getTextColor = function (colorIndex: string) {
-    // const data = element.colors[colorIndex] ?? { hex: "#FFFFFF", dark: true };
-    return colorIndexChangeList.includes(colorIndex) && ElementData[56].colors[colorIndex].dark ? "#FFFFFF" : "#000000";
+    return colorIndexChangeList.has(colorIndex) && ElementData[56].colors[colorIndex].dark ? "#FFFFFF" : "#000000";
   };
   
 

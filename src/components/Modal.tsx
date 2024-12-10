@@ -71,7 +71,7 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, currentElement }) => {
             <li><span className='font-bold'>Atomic Number:</span> {currentElement.number}</li>
             <li><span className='font-bold'>Category:</span> {currentElement.category}</li>
             <li><span className='font-bold'>Atomic Mass (amu):</span> {currentElement.atomic_mass}</li>
-            <li><span className='font-bold'>Electron Configuration:</span> {formatElectronConfiguration(currentElement.electron_configuration)}</li>
+            <li><span className='font-bold'>Electron Configuration:</span> {currentElement.electron_configuration}</li>
             {/* <li><span className='font-bold'>Electron Configuration:</span> {currentElement.electron_configuration}</li> */}
             {currentElement.appearance !== null && (<li><span className='font-bold'>Appearance:</span> {currentElement.appearance}</li>)}
             <li><span className='font-bold'>Phase (Room Temperature):</span> {currentElement.phase}</li>
@@ -97,13 +97,5 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, currentElement }) => {
     </div>
   );
 };
-
-const superscriptMap: { [key: string]: string } = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' } as const;
-function formatElectronConfiguration(input: string): string {
-    return input.replace(/([spdf])(\d+)/g, (_match, orbital, digits) => {
-      const superscriptDigits = digits.split('').map((digit: string) => superscriptMap[digit]).join('');
-      return `${orbital}${superscriptDigits}`;
-    });
-}
 
 export default Modal;

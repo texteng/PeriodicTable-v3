@@ -85,7 +85,7 @@ function App() {
         <GroupLabel
           data={{ ...GroupData[i] }}
           hover={handleHoverGroup}
-          key={i}
+          key={GroupData[i].groupNumber}
           wide={isWide}
         />
       )
@@ -119,7 +119,7 @@ function App() {
           click={handleSelectCurrentElement}
           colorIndex={colorIndexData.colorIndex}
           wide={isWide}
-          key={i}
+          key={ElementData[i].number}
         />)
       }
     }

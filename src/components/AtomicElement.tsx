@@ -29,7 +29,6 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   const baseClasses = () => {
     const standardClasses = `element absolute text-center rounded-md p-1 border border-gray-400 hover:border-gray-600 hover:shadow-inner transition-opacity ease-in-out duration-100 px-0 shadow-xl`;
     return wide ? standardClasses : standardClasses + " md:py-2 lg:py-1";
-
   }
 
   const positionClasses = () => {
@@ -61,32 +60,32 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
         (obscure.lanth && element.number >= 57 && element.number <= 71) ||
         (obscure.actin && element.number >= 89 && element.number <= 103)
       ) {
-        setStyle({ ...style, ...defaultStyles });
+        setStyle(prev => ({ ...prev, ...defaultStyles }));
       } else if (
         obscure.period !== element.period &&
         obscure.group !== element.group &&
         obscure.category !== getBackgroundColor(colorIndex, element) &&
         obscure.element !== element.number
       ) {
-        setStyle({ ...style, ...obscureStyles });
+        setStyle(prev => ({ ...prev, ...obscureStyles }));
       } else {
-        setStyle({ ...style, ...defaultStyles });
+        setStyle(prev => ({ ...prev, ...defaultStyles }));
       }
     } else {
-      setStyle({ ...style, ...defaultStyles });
+      setStyle(prev => ({ ...prev, ...defaultStyles }));
     }
-  }, [obscure, colorIndex]);
+  }, [obscure, colorIndex, element]);
 
   useEffect(() => {
-    setStyle({
-      ...style,
+    setStyle(prev => ({
+      ...prev,
       color: getTextColor(colorIndex, element),
       background: getBackgroundColor(colorIndex, element)
-    })
+    }))
     setAdditionalInfo({
       info: getAdditionalInfo(colorIndex, element)
     })
-  }, [colorIndex]);
+  }, [colorIndex, element]);
 
   const getAdditionalInfo = function (colorIndex: string, element: iElement): string {
     if (showMassAsAdditionalCategory.has(colorIndex)) {

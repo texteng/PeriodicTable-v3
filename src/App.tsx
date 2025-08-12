@@ -36,11 +36,8 @@ function App() {
     otherElementHighlighted: false
   });
 
-  const defaultCurrentElement = { currentElement: ElementData[0] };
-  const defaultColorIndex = { colorIndex: 'cpk' };
-
-  const [currentElement, setCurrentElement] = useState({ ...defaultCurrentElement });
-  const [colorIndexData, setColorIndex] = useState({ ...defaultColorIndex });
+  const [currentElement, setCurrentElement] = useState(ElementData[0]);
+  const [colorIndex, setColorIndex] = useState('cpk');
   
   const [isAboutModalOpen, setIsAboutModalOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -117,7 +114,7 @@ function App() {
           obscure={hoverState}
           hover={handleHoverElement}
           click={handleSelectCurrentElement}
-          colorIndex={colorIndexData.colorIndex}
+          colorIndex={colorIndex}
           wide={isWide}
           key={ElementData[i].number}
         />)
@@ -133,13 +130,13 @@ function App() {
         <LanthBlock
             obscure={hoverState}
             hover={handleHoverLanth}
-            colorIndex={colorIndexData.colorIndex}
+            colorIndex={colorIndex}
             key={'lanth'}
         />,
         <ActinBlock
           obscure={hoverState}
           hover={handleHoverActin}
-          colorIndex={colorIndexData.colorIndex}
+          colorIndex={colorIndex}
           key={'actin'}
       />
       )
@@ -148,14 +145,14 @@ function App() {
   }
 
   const handleSelectColorIndex = (colorIndex: string) => {
-    setColorIndex({ colorIndex });
+    setColorIndex(colorIndex);
   }
 
   const closeModal = () => setIsModalOpen(false);
   const closeAboutModal = () => setIsAboutModalOpen(false);
 
   const handleSelectCurrentElement = (currentElement: iElement) => {
-    setCurrentElement({ currentElement });
+    setCurrentElement(currentElement);
     setIsModalOpen(true);
   }
 
@@ -170,7 +167,7 @@ function App() {
   return (
     <div className="App">
       <Header 
-        select={handleSelectColorIndex} colorIndex={colorIndexData.colorIndex}
+        select={handleSelectColorIndex} colorIndex={colorIndex}
         aboutButtonClick={handleAboutButtonClick}
         wide={isWide}
         wideButtonClick={handleWideButtonClick}
@@ -179,8 +176,8 @@ function App() {
       {renderPeriodLabels()}
       {renderElements()}
       {renderLanthAndActinBlocks()}
-      <Legend colorIndex={colorIndexData.colorIndex} hover={handleHoverCategory} wide={isWide}/>
-      <Modal show={isModalOpen} onClose={closeModal} currentElement={currentElement.currentElement} />
+      <Legend colorIndex={colorIndex} hover={handleHoverCategory} wide={isWide}/>
+      <Modal show={isModalOpen} onClose={closeModal} currentElement={currentElement} />
       <About show={isAboutModalOpen} onClose={closeAboutModal}/>
     </div>
   );

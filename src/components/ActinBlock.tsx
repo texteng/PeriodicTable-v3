@@ -5,13 +5,14 @@ import ElementData from '../assets/ElementData';
 
 
 const ActinBlock: React.FC<iLanthAndActinProps> = ({ obscure, colorIndex, hover }) => {
-  const defaultBackgroundColor = { background: 'rgb(211,211,211)'}; // not using hex so this will not hover
-  const defaultTextColor = { color: '#000000' };
-
-  const defaultStyles = { filter: "grayscale(0%)", opacity: 1 };
   const obscureStyles = { filter: "grayscale(80%)", opacity: .25 };
 
-  const [style, setStyle] = useState({ ...defaultBackgroundColor, ...defaultTextColor, ...defaultStyles });
+  const [style, setStyle] = useState({ 
+    background: 'rgb(211,211,211)', 
+    color: '#000000', 
+    filter: "grayscale(0%)", 
+    opacity: 1 
+  });
 
   const handleHoverOver = () => hover(true);
   const handleHoverLeave = () => hover(false);
@@ -19,25 +20,25 @@ const ActinBlock: React.FC<iLanthAndActinProps> = ({ obscure, colorIndex, hover 
 
   useEffect(() => {
     if (obscure.actin) {
-      setStyle({ ...style, ...defaultStyles });
+      setStyle(prev => ({ ...prev, filter: "grayscale(0%)", opacity: 1 }));
     } else if (
       obscure.otherElementHighlighted &&
       obscure.period !== 7 &&
       obscure.group !== 3 &&
       obscure.category !== getBackgroundColor(colorIndex)
     ) {
-      setStyle({...style, ...obscureStyles});
+      setStyle(prev => ({ ...prev, ...obscureStyles }));
     } else {
-      setStyle({...style, ...defaultStyles});
+      setStyle(prev => ({ ...prev, filter: "grayscale(0%)", opacity: 1 }));
     }
   }, [obscure, colorIndex]);
 
   useEffect(() => {
-    setStyle({
-      ...style,
+    setStyle(prev => ({
+      ...prev,
       color: getTextColor(colorIndex),
       background: getBackgroundColor(colorIndex)
-    })
+    }))
   }, [colorIndex]);
 
   const getBackgroundColor = function (colorIndex: string) {

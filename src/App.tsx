@@ -5,7 +5,7 @@ import GroupData from './assets/GroupData';
 
 import GroupLabel from './components/GroupLabel';
 import PeriodLabel from './components/PeriodLabel';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Modal from './components/Modal';
 import About from './components/About';
 import Legend from './components/Legend';
@@ -14,34 +14,69 @@ import Header from './components/Header';
 import LanthBlock from './components/LanthBlock';
 import ActinBlock from './components/ActinBlock';
 
+interface HoverState {
+  period: number;
+  group: number;
+  element: number;
+  category: string;
+  lanth: boolean;
+  actin: boolean;
+  otherElementHighlighted: boolean;
+}
+
 function App() {
 
-  // const [ hoverPeriod, setHoverPeriod ] = useState({ hoverPeriod: (num: number) => num });
-  const defaultPeriodHover = { periodHover: 0 };
-  const defaultGroupHover = { groupHover: 0 };
-  const defaultElementHover = { elementHover: 0 };
-  const defaultCategoryHover = { categoryHover: '' };
-  const defaultLanthHover = { lanthHover: false };
-  const defaultActinHover = { actinHover: false };
+  const [hoverState, setHoverState] = useState<HoverState>({
+    period: 0,
+    group: 0,
+    element: 0,
+    category: '',
+    lanth: false,
+    actin: false,
+    otherElementHighlighted: false
+  });
 
   const defaultCurrentElement = { currentElement: ElementData[0] };
-  const defaultOtherElementHighlighted = { otherElementHighlighted: false };
   const defaultColorIndex = { colorIndex: 'cpk' };
 
-  const [periodHover, setPeriodHover] = useState({ ...defaultPeriodHover });
-  const [groupHover, setGroupHover] = useState({ ...defaultGroupHover });
-  const [categoryHover, setCategoryHover] = useState({ ...defaultCategoryHover });
-  const [elementHover, setElementHover] = useState({ ...defaultElementHover });
-  const [lanthHover, setLanthHover] = useState({ ...defaultLanthHover });
-  const [actinHover, setActinHover] = useState({ ...defaultActinHover });
-
   const [currentElement, setCurrentElement] = useState({ ...defaultCurrentElement });
-  const [otherElementHighlighted, setOtherElementHighlighted] = useState({ ...defaultOtherElementHighlighted });
   const [colorIndexData, setColorIndex] = useState({ ...defaultColorIndex });
   
   const [isAboutModalOpen, setIsAboutModalOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isWide, setIsWide] = useState<boolean>(false);
+
+  const updateHover = useCallback((type: keyof HoverState, value: any) => {
+    setHoverState(prev => ({
+      ...prev,
+      [type]: value,
+      otherElementHighlighted: value !== 0 && value !== '' && value !== false
+    }));
+  }, []);
+
+  const handleHoverPeriod = useCallback((period: number) => {
+    updateHover('period', period);
+  }, [updateHover]);
+
+  const handleHoverGroup = useCallback((group: number) => {
+    updateHover('group', group);
+  }, [updateHover]);
+
+  const handleHoverCategory = useCallback((category: string) => {
+    updateHover('category', category);
+  }, [updateHover]);
+
+  const handleHoverElement = useCallback((element: number) => {
+    updateHover('element', element);
+  }, [updateHover]);
+
+  const handleHoverLanth = useCallback((lanth: boolean) => {
+    updateHover('lanth', lanth);
+  }, [updateHover]);
+
+  const handleHoverActin = useCallback((actin: boolean) => {
+    updateHover('actin', actin);
+  }, [updateHover]);
 
   const renderGroupLabels = () => {
     const headerArr = [];
@@ -51,7 +86,7 @@ function App() {
           data={{ ...GroupData[i] }}
           hover={handleHoverGroup}
           key={i}
-          wide={ isWide }
+          wide={isWide}
         />
       )
     }
@@ -66,7 +101,7 @@ function App() {
           data={{ periodNumber: i }}
           hover={handleHoverPeriod}
           key={i}
-          wide={ isWide }
+          wide={isWide}
         />
       )
     }
@@ -79,15 +114,7 @@ function App() {
       if (ElementData[i]) {
         elements.push(<AtomicElement
           element={ElementData[i]}
-          obscure={{ 
-            ...periodHover,
-            ...groupHover,
-            ...elementHover,
-            ...categoryHover,
-            ...lanthHover,
-            ...actinHover,
-            ...otherElementHighlighted
-          }}
+          obscure={hoverState}
           hover={handleHoverElement}
           click={handleSelectCurrentElement}
           colorIndex={colorIndexData.colorIndex}
@@ -104,50 +131,20 @@ function App() {
     if (!isWide) {
       elements.push(
         <LanthBlock
-            obscure={{ ...periodHover, ...groupHover, ...elementHover, ...categoryHover, ...lanthHover, ...actinHover, ...otherElementHighlighted }}
-            hover={ handleHoverLanth }
+            obscure={hoverState}
+            hover={handleHoverLanth}
             colorIndex={colorIndexData.colorIndex}
             key={'lanth'}
         />,
         <ActinBlock
-          obscure={{ ...periodHover, ...groupHover, ...elementHover, ...categoryHover, ...lanthHover, ...actinHover, ...otherElementHighlighted }}
-          hover={ handleHoverActin }
+          obscure={hoverState}
+          hover={handleHoverActin}
           colorIndex={colorIndexData.colorIndex}
           key={'actin'}
       />
       )
     }
     return elements;
-  }
-
-  const handleHoverPeriod = (periodHover: number) => {
-    setPeriodHover({ periodHover });
-    setOtherElementHighlighted({ otherElementHighlighted: periodHover !== 0 })
-  }
-
-  const handleHoverGroup = (groupHover: number) => {
-    setGroupHover({ groupHover });
-    setOtherElementHighlighted({ otherElementHighlighted: groupHover !== 0 })
-  }
-
-  const handleHoverCategory = (categoryHover: string) => {
-    setCategoryHover({ categoryHover });
-    setOtherElementHighlighted({ otherElementHighlighted: categoryHover !== '' })
-  }
-
-  const handleHoverElement = (elementHover: number) => {
-    setElementHover({ elementHover });
-    setOtherElementHighlighted({ otherElementHighlighted: elementHover !== 0 })
-  }
-
-  const handleHoverLanth = (lanthHover: boolean) => {
-    setLanthHover({ lanthHover });
-    setOtherElementHighlighted({ otherElementHighlighted: lanthHover })
-  }
-
-  const handleHoverActin = (actinHover: boolean) => {
-    setActinHover({ actinHover });
-    setOtherElementHighlighted({ otherElementHighlighted: actinHover })
   }
 
   const handleSelectColorIndex = (colorIndex: string) => {

@@ -18,17 +18,17 @@ const LanthBlock: React.FC<iLanthAndActinProps> = ({ obscure, colorIndex, hover 
   const colorIndexChangeList = new Set(['group_block', 'category']);
 
   useEffect(() => {
-    if (obscure.lanthHover) {
+    if (obscure.lanth) {
       setStyle({ ...style, ...defaultStyles })
     }
     else if (obscure.otherElementHighlighted &&
-      obscure.periodHover !== 6 &&
-      obscure.groupHover !== 3 &&
-      obscure.categoryHover !== getBackgroundColor(colorIndex)
+      obscure.period !== 6 &&
+      obscure.group !== 3 &&
+      obscure.category !== getBackgroundColor(colorIndex)
     ) {
-      setStyle({ ...style, ...obscureStyles })
+      setStyle({...style, ...obscureStyles})
     } else {
-      setStyle({ ...style, ...defaultStyles })
+      setStyle({...style, ...defaultStyles})
     }
   }, [obscure, colorIndex]);
 

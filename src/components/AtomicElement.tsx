@@ -58,15 +58,15 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   useEffect(() => {
     if (obscure.otherElementHighlighted) {
       if (
-        (obscure.lanthHover && element.number >= 57 && element.number <= 71) ||
-        (obscure.actinHover && element.number >= 89 && element.number <= 103)
+        (obscure.lanth && element.number >= 57 && element.number <= 71) ||
+        (obscure.actin && element.number >= 89 && element.number <= 103)
       ) {
         setStyle({ ...style, ...defaultStyles });
       } else if (
-        obscure.periodHover !== element.period &&
-        obscure.groupHover !== element.group &&
-        obscure.categoryHover !== getBackgroundColor(colorIndex, element) &&
-        obscure.elementHover !== element.number
+        obscure.period !== element.period &&
+        obscure.group !== element.group &&
+        obscure.category !== getBackgroundColor(colorIndex, element) &&
+        obscure.element !== element.number
       ) {
         setStyle({ ...style, ...obscureStyles });
       } else {

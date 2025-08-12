@@ -16,12 +16,12 @@ export interface iLanthAndActinProps {
 }
 
 export interface obscure {
-    periodHover: number;
-    groupHover: number;
-    elementHover?: number;
-    categoryHover: string;
-    lanthHover: boolean;
-    actinHover: boolean;
+    period: number;
+    group: number;
+    element: number;
+    category: string;
+    lanth: boolean;
+    actin: boolean;
     otherElementHighlighted: boolean;
 };
 

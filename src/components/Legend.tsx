@@ -3,7 +3,7 @@ import './Legend.css';
 import { iLegendProps } from '../schemas/PropInterfaces';
 import { LegendData } from '../assets/LegendData';
 
-const Legend: React.FC<iLegendProps> = ({ colorIndex, wide, hover }) => {
+const Legend: React.FC<iLegendProps> = React.memo(({ colorIndex, hover, wide }) => {
   const [legendCategory, setLegendCategory] = useState(LegendData['cpk']);
 
   const handleHoverOver = (colorHex: string) => hover(colorHex)
@@ -50,6 +50,6 @@ const Legend: React.FC<iLegendProps> = ({ colorIndex, wide, hover }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Legend;

@@ -6,7 +6,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const About: React.FC<ModalProps> = ({ show, onClose }) => {
+const About: React.FC<ModalProps> = React.memo(({ show, onClose }) => {
   // Return null if the modal should not be shown
 
   useEffect(() => {
@@ -55,6 +55,6 @@ const About: React.FC<ModalProps> = ({ show, onClose }) => {
       </div>
     </div>
   );
-};
+});
 
 export default About;

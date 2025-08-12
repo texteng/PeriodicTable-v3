@@ -4,7 +4,7 @@ import { iLanthAndActinProps } from '../schemas/PropInterfaces';
 import ElementData from '../assets/ElementData';
 
 
-const LanthBlock: React.FC<iLanthAndActinProps> = ({ obscure, colorIndex, hover }) => {
+const LanthBlock: React.FC<iLanthAndActinProps> = React.memo(({ obscure, hover, colorIndex }) => {
   const obscureStyles = { filter: "grayscale(80%)", opacity: .25 };
 
   const [style, setStyle] = useState({ 
@@ -67,7 +67,7 @@ const LanthBlock: React.FC<iLanthAndActinProps> = ({ obscure, colorIndex, hover 
     </a>
   );
 
-};
+});
 
 
 export default LanthBlock;

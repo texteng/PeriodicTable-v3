@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { iElement } from '../schemas/ElementInterface';
 import './AtomicElement.css';
 import { iAtomicElementProps } from '../schemas/PropInterfaces';
 
 
-const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorIndex, wide, hover, click }) => {
-  const defaultBackgroundColor = { background: getBackgroundColor(colorIndex, element) };
-  const defaultTextColor = { color: getTextColor(colorIndex, element) };
-  const massNumber = renderMassNumber(element.atomic_mass);
-  const defaultAdditionalInfo = { info: massNumber }
+const AtomicElement: React.FC<iAtomicElementProps> = React.memo(({ element, obscure, colorIndex, wide, hover, click }) => {
+  // Memoize expensive calculations
+  const defaultBackgroundColor = useMemo(() => ({ background: getBackgroundColor(colorIndex, element) }), [colorIndex, element]);
+  const defaultTextColor = useMemo(() => ({ color: getTextColor(colorIndex, element) }), [colorIndex, element]);
+  const massNumber = useMemo(() => renderMassNumber(element.atomic_mass), [element.atomic_mass]);
+  const defaultAdditionalInfo = useMemo(() => ({ info: massNumber }), [massNumber]);
 
   const defaultStyles = { filter: "grayscale(0%)", opacity: 1 };
   const obscureStyles = { filter: "grayscale(80%)", opacity: .25 };
@@ -19,12 +20,10 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
   const hideAdditionalInfoCategory = new Set(['bonding_type', 'block', 'phase' ]);
   const showMassAsAdditionalCategory = new Set(['cpk', 'group_block', 'category']);
 
-  const handleHoverOver = () => hover(element.number);
-  const handleHoverLeave = () => hover(0);
-
-  const handleClick = () => {
-    return click(element)
-  }
+  // Memoize event handlers
+  const handleHoverOver = useCallback(() => hover(element.number), [hover, element.number]);
+  const handleHoverLeave = useCallback(() => hover(0), [hover]);
+  const handleClick = useCallback(() => click(element), [click, element]);
 
   const baseClasses = () => {
     const standardClasses = `element absolute text-center rounded-md p-1 border border-gray-400 hover:border-gray-600 hover:shadow-inner transition-opacity ease-in-out duration-100 px-0 shadow-xl`;
@@ -109,7 +108,7 @@ const AtomicElement: React.FC<iAtomicElementProps> = ({ element, obscure, colorI
     </div>
   );
 
-};
+});
 
 const renderMassNumber = (atomicMass: number) => {
   const atomicMassValue: number = atomicMass;

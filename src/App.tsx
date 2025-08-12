@@ -5,14 +5,14 @@ import GroupData from './assets/GroupData';
 
 import GroupLabel from './components/GroupLabel';
 import PeriodLabel from './components/PeriodLabel';
-import { useState, useCallback } from 'react';
-import Modal from './components/Modal';
-import About from './components/About';
-import Legend from './components/Legend';
+import { useState, useCallback, Suspense, lazy } from 'react';
 import { iElement } from './schemas/ElementInterface';
 import Header from './components/Header';
 import LanthBlock from './components/LanthBlock';
 import ActinBlock from './components/ActinBlock';
+import Legend from './components/Legend';
+const Modal = lazy(() => import('./components/Modal'));
+const About = lazy(() => import('./components/About'));
 
 interface HoverState {
   period: number;
@@ -177,8 +177,14 @@ function App() {
       {renderElements()}
       {renderLanthAndActinBlocks()}
       <Legend colorIndex={colorIndex} hover={handleHoverCategory} wide={isWide}/>
-      <Modal show={isModalOpen} onClose={closeModal} currentElement={currentElement} />
-      <About show={isAboutModalOpen} onClose={closeAboutModal}/>
+      
+      <Suspense fallback={<div className="text-center py-4">Loading modal...</div>}>
+        <Modal show={isModalOpen} onClose={closeModal} currentElement={currentElement} />
+      </Suspense>
+      
+      <Suspense fallback={<div className="text-center py-4">Loading about...</div>}>
+        <About show={isAboutModalOpen} onClose={closeAboutModal}/>
+      </Suspense>
     </div>
   );
 }

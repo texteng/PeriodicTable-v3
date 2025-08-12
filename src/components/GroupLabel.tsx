@@ -2,7 +2,7 @@ import React from 'react';
 import './GroupLabel.css';
 import { iGroupLabelProps } from '../schemas/PropInterfaces';
 
-const GroupLabel: React.FC<iGroupLabelProps> = ({ data, wide, hover }) => {
+const GroupLabel: React.FC<iGroupLabelProps> = React.memo(({ data, hover, wide }) => {
   const handleHoverOver = () => hover(data.groupNumber)
   const handleHoverLeave = () => hover(0);
 
@@ -33,6 +33,6 @@ const GroupLabel: React.FC<iGroupLabelProps> = ({ data, wide, hover }) => {
 
     </div>
   );
-};
+});
 
 export default GroupLabel;

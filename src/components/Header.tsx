@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Header.css';
 import { iHeaderProps } from '../schemas/PropInterfaces';
 
-const Header: React.FC<iHeaderProps> = ({ colorIndex, wide, select, aboutButtonClick, wideButtonClick }) => {
+const Header: React.FC<iHeaderProps> = React.memo(({ colorIndex, wide, select, aboutButtonClick, wideButtonClick }) => {
   const handleSelectColorIndex = (colorIndexSelection: string) => {
     select(colorIndexSelection);
   }
@@ -81,6 +81,6 @@ const Header: React.FC<iHeaderProps> = ({ colorIndex, wide, select, aboutButtonC
       </div>
     </div>
   );
-};
+});
 
 export default Header;

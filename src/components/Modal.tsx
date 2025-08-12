@@ -8,7 +8,7 @@ interface ModalProps {
   currentElement: iElement;
 }
 
-const Modal: React.FC<ModalProps> = ({ show, onClose, currentElement }) => {
+const Modal: React.FC<ModalProps> = React.memo(({ show, onClose, currentElement }) => {
   // Return null if the modal should not be shown
 
   useEffect(() => {
@@ -96,6 +96,6 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, currentElement }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Modal;

@@ -2,7 +2,7 @@ import React from 'react';
 import './PeriodLabel.css';
 import { iPeriodLabelProps } from '../schemas/PropInterfaces';
 
-const PeriodLabel: React.FC<iPeriodLabelProps> = ({ data, wide, hover }) => {
+const PeriodLabel: React.FC<iPeriodLabelProps> = React.memo(({ data, hover, wide }) => {
   const handleHoverOver = () => hover(data.periodNumber);
   const handleHoverLeave = () => hover(0);
 
@@ -31,6 +31,6 @@ const PeriodLabel: React.FC<iPeriodLabelProps> = ({ data, wide, hover }) => {
       </a>
     </div>
   );
-};
+});
 
 export default PeriodLabel;

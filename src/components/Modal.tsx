@@ -39,7 +39,7 @@ const Modal: React.FC<ModalProps> = React.memo(({ show, onClose, currentElement 
   }
 
   return (
-    <div className="bg-black bg-opacity-50 w-screen h-screen top-0 left-0 grid justify-center items-center fixed" onClick={handleOverlayClick}>
+    <div className="bg-black/50 w-screen h-screen top-0 left-0 grid justify-center items-center fixed" onClick={handleOverlayClick}>
       <div className='w-[80vw] bg-white rounded-2xl place-self-center max-w-full text-left'>
         <h2 className='text-3xl p-4'>{currentElement.name} ({currentElement.symbol})</h2>
         <hr />

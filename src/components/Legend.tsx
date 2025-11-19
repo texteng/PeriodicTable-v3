@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Legend.css';
+import './Legend.scss';
 import { iLegendProps } from '../schemas/PropInterfaces';
 import { LegendData } from '../assets/LegendData';
 
@@ -43,7 +43,7 @@ const Legend: React.FC<iLegendProps> = React.memo(({ colorIndex, hover, wide }) 
             onMouseOut={() => handleHoverLeave()}
             key={colorData.color}
           >
-            <div className='inline-block mr-2 color-box rounded-sm border-solid border-1' style={{ background: colorData.color }}></div>
+            <div className='inline-block mr-2 h-5 w-5 rounded-sm border-solid border-1' style={{ background: colorData.color }}></div>
             <span className='inline text-base align-text-bottom'>{colorData.displayName}</span>
           </div>
         ))}

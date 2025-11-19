@@ -1,0 +1,75 @@
+@use '../styles/variables' as *;
+
+.l-top {
+    @media (max-width: $md-width) {
+        top: calc(#{$p-sm-height} * 12.5);
+    }
+    @media (min-width: $md-width) and (max-width: $lg-width) {
+        top: calc(#{$p-md-height} * 12.5);
+    }
+    @media (min-width: $lg-width) and (max-width: $xl-width) {
+        top: $p-lg-height;
+    }
+    @media (min-width: $xl-width) and (max-width: $xxl-width) {
+        top: $p-xl-height;
+    }
+    @media (min-width: $xxl-width)  {
+        top: $p-xxl-height;
+    }
+}
+
+.lw-top {
+    top: calc(#{$p-sm-height} * 9.5);
+}
+
+.l-left {
+    @media (max-width: $md-width) {
+        left: $p-sm-width;
+        width: calc(18 * #{$p-sm-width});
+    }
+    @media (min-width: $md-width) and (max-width: $lg-width) {
+        left: $p-md-width;
+        width: calc(18 * #{$p-md-width});
+    }
+    @media (min-width: $lg-width) and (max-width: $xl-width) {
+        left: calc(3 * #{$p-lg-width});
+        width: calc(10 * #{$p-lg-width});
+    }
+    @media (min-width: $xl-width) and (max-width: $xxl-width) {
+        left: calc(3 * #{$p-xl-width});
+        width: calc(10 * #{$p-lg-width});
+    }
+    @media (min-width: $xxl-width)  {
+        left: calc(3 * #{$p-xxl-width});
+        width: calc(10 * #{$p-lg-width});
+    }
+}
+
+.lw-left {
+    left: $p-sm-width;
+    width: calc(20 * #{$p-sm-width});
+}
+
+.l-height {
+    @media (max-width: $md-width) {
+        max-height: calc(calc(5 * #{$p-sm-height}) - 20px);
+    }
+    @media (min-width: $md-width) and (max-width: $lg-width) {
+        max-height: calc(calc(3 * #{$p-md-height}) - 20px);
+    }
+    @media (min-width: $lg-width) and (max-width: $xl-width) {
+        max-height: calc(calc(3 * #{$p-lg-height}) - 20px);
+    }
+    @media (min-width: $xl-width) and (max-width: $xxl-width) {
+        max-height: calc(calc(3 * #{$p-xl-height}) - 20px);
+    }
+    @media (min-width: $xxl-width)  {
+        max-height: calc(calc(3 * #{$p-xxl-height}) - 20px);
+    }
+}
+
+.lw-height {
+    max-height: calc(calc(3 * #{$p-sm-height}) - 20px);
+}
+
+

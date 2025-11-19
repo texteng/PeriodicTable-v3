@@ -26,12 +26,12 @@ const Header: React.FC<iHeaderProps> = React.memo(({ colorIndex, wide, select, a
   }
 
   const renderTitleClasses = () => {
-    const baseClasses = 'text-sm col';
+    const baseClasses = 'text-sm col whitespace-nowrap';
     return wide ? baseClasses : `${baseClasses} md:text-base xl:text-xl`
   }
 
   const renderSelectorClasses = () => {
-    const baseClasses = 'col-start-13 text-sm';
+    const baseClasses = 'col-start-13 col-span-2 text-sm flex justify-end items-center';
     return wide ? baseClasses : `${baseClasses} md:text-base xl:text-xl`;
   }
 
@@ -39,8 +39,8 @@ const Header: React.FC<iHeaderProps> = React.memo(({ colorIndex, wide, select, a
     <div className={ renderHeaderContainerClasses() }>
       <div className={ renderTitleClasses() }>Periodic Table of Elements</div>
       <div className={ renderSelectorClasses() } >
-        <div id="color-options" className='place-self-end inline-block'>
-          <label htmlFor="color-index" className="mr-6">Pick Color Type</label>
+        <div id="color-options" className='flex items-center'>
+          <label htmlFor="color-index" className="mr-6 whitespace-nowrap">Pick Color Type</label>
           <select name="color-index"
             onChange={e => handleSelectColorIndex(e.target.value)}
             value={colorIndex}

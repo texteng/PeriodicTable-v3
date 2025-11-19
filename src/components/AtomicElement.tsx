@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { iElement } from '../schemas/ElementInterface';
-import './AtomicElement.css';
 import { iAtomicElementProps } from '../schemas/PropInterfaces';
 
 

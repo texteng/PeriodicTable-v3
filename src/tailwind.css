@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --border-width-1: 1px;
+  --grid-template-columns-14: repeat(14, minmax(auto, 1fr));
+}

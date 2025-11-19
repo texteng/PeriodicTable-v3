@@ -1,0 +1,89 @@
+@use "./styles/variables" as *;
+
+/* Fallback/Custom classes */
+.col {
+    grid-column: 1 / 13;
+}
+
+.element {
+    position: absolute;
+}
+
+/* Export CSS variables for other files if needed, though SCSS variables are preferred in SCSS files */
+:root {
+    --p-sm-height: #{$p-sm-height};
+    --p-md-height: #{$p-md-height};
+    --p-lg-height: #{$p-lg-height};
+    --p-xl-height: #{$p-xl-height};
+    --p-xxl-height: #{$p-xxl-height};
+
+    --p-sm-width: #{$p-sm-width};
+    --p-md-width: #{$p-md-width};
+    --p-lg-width: #{$p-lg-width};
+    --p-xl-width: #{$p-xl-width};
+    --p-xxl-width: #{$p-xxl-width};
+}
+
+@for $i from 0 through 10 {
+    .e-top-#{$i} {
+        @media (max-width: $md-width) {
+            top: calc(($i + 1) * $p-sm-height);
+            height: $p-sm-height;
+        }
+        @media (min-width: $md-width) and (max-width: $lg-width) {
+            top: calc(($i + 1) * $p-md-height);
+            height: $p-md-height;
+        }
+        @media (min-width: $lg-width) and (max-width: $xl-width) {
+            top: calc(($i + 1) * $p-lg-height);
+            height: $p-lg-height;
+        }
+        @media (min-width: $xl-width) and (max-width: $xxl-width) {
+            top: calc(($i + 1) * $p-xl-height);
+            height: $p-xl-height;
+        }
+        @media (min-width: $xxl-width)  {
+            top: calc(($i + 1) * $p-xxl-height);
+            height: $p-xxl-height;
+        }
+    }
+}
+
+@for $i from 0 through 7 {
+    .ew-top-#{$i} {
+        top: calc(($i + 1) * $p-sm-height);
+        height: $p-sm-height;
+    }
+}
+
+@for $i from 0 through 18 {
+    .e-left-#{$i} {
+        @media (max-width: $md-width) {
+            left: calc($i * $p-sm-width);
+            width: $p-sm-width;
+        }
+        @media (min-width: $md-width) and (max-width: $lg-width) {
+            left: calc($i * $p-md-width);
+            width: $p-md-width;
+        }
+        @media (min-width: $lg-width) and (max-width: $xl-width) {
+            left: calc($i * $p-lg-width);
+            width: $p-lg-width;
+        }
+        @media (min-width: $xl-width) and (max-width: $xxl-width) {
+            left: calc($i * $p-xl-width);
+            width: $p-xl-width;
+        }
+        @media (min-width: $xxl-width)  {
+            left: calc($i * $p-xxl-width);
+            width: $p-xxl-width;
+        }
+    }
+}
+
+@for $i from 0 through 40 {
+    .ew-left-#{$i} {
+        left: calc($i * $p-sm-width);
+        width: $p-sm-width;
+    }
+}

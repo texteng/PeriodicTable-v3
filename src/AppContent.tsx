@@ -33,48 +33,34 @@ function AppContent() {
   } = context;
 
   const renderGroupLabels = () => {
-    const headerArr = [];
-    for (let i = 0; i < GroupData.length; i++) {
-      headerArr.push(
-        <GroupLabel
-          data={{ ...GroupData[i] }}
-          hover={handleHoverGroup}
-          key={GroupData[i].groupNumber}
-          wide={isWide}
-        />
-      )
-    }
-    return headerArr;
+    return GroupData.map((group) => (
+      <GroupLabel
+        data={group}
+        hover={handleHoverGroup}
+        key={group.groupNumber}
+        wide={isWide}
+      />
+    ));
   }
 
   const renderPeriodLabels = () => {
-    const periodLabelsArr = []
-    for (let i = 1; i < 8; i++) {
-      periodLabelsArr.push(
-        <PeriodLabel
-          data={{ periodNumber: i }}
-          hover={handleHoverPeriod}
-          key={i}
-          wide={isWide}
-        />
-      )
-    }
-    return periodLabelsArr;
+    return Array.from({ length: 7 }, (_, i) => i + 1).map((period) => (
+      <PeriodLabel
+        data={{ periodNumber: period }}
+        hover={handleHoverPeriod}
+        key={period}
+        wide={isWide}
+      />
+    ));
   }
 
   const renderElements = () => {
-    const elements = [];
-    for (let i = 0; i < ElementData.length; i++) {
-      if (ElementData[i]) {
-        elements.push(
-          <AtomicElement
-            element={ElementData[i]}
-            key={ElementData[i].number}
-          />
-        )
-      }
-    }
-    return elements;
+    return ElementData.filter(Boolean).map((element) => (
+      <AtomicElement
+        element={element}
+        key={element.number}
+      />
+    ));
   }
 
   const renderLanthAndActinBlocks = () => {

@@ -1,8 +1,8 @@
-import React from 'react';
+import { memo } from 'react';
 import './PeriodLabel.css';
 import { iPeriodLabelProps } from '../schemas/PropInterfaces';
 
-const PeriodLabel: React.FC<iPeriodLabelProps> = React.memo(({ data, hover, wide }) => {
+const PeriodLabel = memo<iPeriodLabelProps>(({ data, hover, wide }) => {
   const handleHoverOver = () => hover(data.periodNumber);
   const handleHoverLeave = () => hover(0);
 

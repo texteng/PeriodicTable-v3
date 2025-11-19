@@ -1,10 +1,10 @@
-import React, { useEffect, useState, use } from 'react';
+import { useEffect, useState, use, memo } from 'react';
 import './ActinBlock.css';
 import ElementData from '../assets/ElementData';
 import { AppContext } from '../contexts/AppContext';
 
 
-const ActinBlock: React.FC = React.memo(() => {
+const ActinBlock = memo(() => {
   const context = use(AppContext);
   
   if (!context) {

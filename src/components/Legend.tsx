@@ -1,9 +1,9 @@
-import React, { useEffect, useState, use } from 'react';
+import { useEffect, useState, use, memo } from 'react';
 import './Legend.scss';
 import { LegendData } from '../assets/LegendData';
 import { AppContext } from '../contexts/AppContext';
 
-const Legend: React.FC = React.memo(() => {
+const Legend = memo(() => {
   const context = use(AppContext);
   
   if (!context) {

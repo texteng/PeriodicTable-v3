@@ -1,10 +1,10 @@
-import React, { useEffect, useState, use } from 'react';
+import { useEffect, useState, use, memo } from 'react';
 import './LanthBlock.css';
 import ElementData from '../assets/ElementData';
 import { AppContext } from '../contexts/AppContext';
 
 
-const LanthBlock: React.FC = React.memo(() => {
+const LanthBlock = memo(() => {
   const context = use(AppContext);
   
   if (!context) {

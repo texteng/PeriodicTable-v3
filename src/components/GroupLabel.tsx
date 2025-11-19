@@ -1,8 +1,8 @@
-import React from 'react';
+import { memo } from 'react';
 import './GroupLabel.css';
 import { iGroupLabelProps } from '../schemas/PropInterfaces';
 
-const GroupLabel: React.FC<iGroupLabelProps> = React.memo(({ data, hover, wide }) => {
+const GroupLabel = memo<iGroupLabelProps>(({ data, hover, wide }) => {
   const handleHoverOver = () => hover(data.groupNumber)
   const handleHoverLeave = () => hover(0);
 

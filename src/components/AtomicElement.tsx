@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback, use } from 'react';
+import { useEffect, useState, useMemo, useCallback, use, memo } from 'react';
 import { iElement } from '../schemas/ElementInterface';
 import { AppContext } from '../contexts/AppContext';
 
@@ -6,7 +6,7 @@ interface AtomicElementProps {
   element: iElement;
 }
 
-const AtomicElement: React.FC<AtomicElementProps> = React.memo(({ element }) => {
+const AtomicElement = memo<AtomicElementProps>(({ element }) => {
   const context = use(AppContext);
   
   if (!context) {

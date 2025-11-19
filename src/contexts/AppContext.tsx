@@ -1,4 +1,4 @@
-import { createContext, useState, useCallback, ReactNode } from 'react';
+import { createContext, useState, useCallback, ReactNode, startTransition } from 'react';
 import { iElement } from '../schemas/ElementInterface';
 import ElementData from '../assets/ElementData';
 
@@ -93,7 +93,9 @@ export function AppProvider({ children }: AppProviderProps) {
   }, [updateHover]);
 
   const handleSelectColorIndex = useCallback((colorIndex: string) => {
-    setColorIndex(colorIndex);
+    startTransition(() => {
+      setColorIndex(colorIndex);
+    });
   }, []);
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);

@@ -1,8 +1,8 @@
-import React, { useEffect, use } from 'react';
+import { useEffect, use, memo } from 'react';
 import './Modal.css';  // Add custom styles for the modal
 import { AppContext } from '../contexts/AppContext';
 
-const Modal: React.FC = React.memo(() => {
+const Modal = memo(() => {
   const context = use(AppContext);
   
   if (!context) {

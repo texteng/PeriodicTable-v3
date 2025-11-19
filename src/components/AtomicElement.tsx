@@ -1,9 +1,26 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useMemo, useCallback, use } from 'react';
 import { iElement } from '../schemas/ElementInterface';
-import { iAtomicElementProps } from '../schemas/PropInterfaces';
+import { AppContext } from '../contexts/AppContext';
 
+interface AtomicElementProps {
+  element: iElement;
+}
 
-const AtomicElement: React.FC<iAtomicElementProps> = React.memo(({ element, obscure, colorIndex, wide, hover, click }) => {
+const AtomicElement: React.FC<AtomicElementProps> = React.memo(({ element }) => {
+  const context = use(AppContext);
+  
+  if (!context) {
+    throw new Error('AtomicElement must be used within AppProvider');
+  }
+
+  const { 
+    hoverState: obscure, 
+    colorIndex, 
+    isWide: wide, 
+    handleHoverElement: hover, 
+    handleSelectCurrentElement: click 
+  } = context;
+
   // Memoize expensive calculations
   const defaultBackgroundColor = useMemo(() => ({ background: getBackgroundColor(colorIndex, element) }), [colorIndex, element]);
   const defaultTextColor = useMemo(() => ({ color: getTextColor(colorIndex, element) }), [colorIndex, element]);

@@ -7,6 +7,4 @@ export interface iLegendCategory {
     }[]
 };
 
-export interface iLegendData {
-    [category: string]: iLegendCategory;
-};
+export type iLegendData = Record<string, iLegendCategory>;;

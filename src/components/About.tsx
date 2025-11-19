@@ -1,23 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, use } from 'react';
 import './Modal.css'; // Add custom styles for the modal
+import { AppContext } from '../contexts/AppContext';
 
-interface ModalProps {
-  show: boolean;
-  onClose: () => void;
-}
+const About: React.FC = React.memo(() => {
+  const context = use(AppContext);
+  
+  if (!context) {
+    throw new Error('About must be used within AppProvider');
+  }
 
-const About: React.FC<ModalProps> = React.memo(({ show, onClose }) => {
-  // Return null if the modal should not be shown
+  const { isAboutModalOpen, closeAboutModal } = context;
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose();
+        closeAboutModal();
       }
     };
 
     // Add event listener when the modal is shown
-    if (show) {
+    if (isAboutModalOpen) {
       document.addEventListener('keydown', handleKeyDown);
     }
 
@@ -25,14 +27,14 @@ const About: React.FC<ModalProps> = React.memo(({ show, onClose }) => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [show, onClose]);  // Depend on show and onClose to add/remove the listener properly
+  }, [isAboutModalOpen, closeAboutModal]);  // Depend on isAboutModalOpen and closeAboutModal to add/remove the listener properly
 
   // Close modal when clicking on the overlay
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (e.target === e.currentTarget) onClose();  // Only close if the target is the overlay (not modal content)
+    if (e.target === e.currentTarget) closeAboutModal();  // Only close if the target is the overlay (not modal content)
   };
 
-  if (!show) {
+  if (!isAboutModalOpen) {
     return null;
   }
 

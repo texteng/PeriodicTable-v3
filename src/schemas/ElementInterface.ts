@@ -41,10 +41,8 @@ export interface iElement {
     ypos: number;
     wxpos: number;
     wypos: number;
-    colors: {
-        [k: string]: {
+    colors: Record<string, {
             hex: string;
             dark: boolean
-        }
-    }
+        }>
 };

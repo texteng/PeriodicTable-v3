@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, use } from 'react';
 import './ActinBlock.css';
-import { iLanthAndActinProps } from '../schemas/PropInterfaces';
 import ElementData from '../assets/ElementData';
+import { AppContext } from '../contexts/AppContext';
 
 
-const ActinBlock: React.FC<iLanthAndActinProps> = React.memo(({ obscure, hover, colorIndex }) => {
+const ActinBlock: React.FC = React.memo(() => {
+  const context = use(AppContext);
+  
+  if (!context) {
+    throw new Error('ActinBlock must be used within AppProvider');
+  }
+
+  const { hoverState: obscure, colorIndex, handleHoverActin } = context;
+  
   const obscureStyles = { filter: "grayscale(80%)", opacity: .25 };
 
   const [style, setStyle] = useState({ 
@@ -14,8 +22,8 @@ const ActinBlock: React.FC<iLanthAndActinProps> = React.memo(({ obscure, hover, 
     opacity: 1 
   });
 
-  const handleHoverOver = () => hover(true);
-  const handleHoverLeave = () => hover(false);
+  const handleHoverOver = () => handleHoverActin(true);
+  const handleHoverLeave = () => handleHoverActin(false);
   const colorIndexChangeList = new Set(['group_block', 'category']);
 
   useEffect(() => {

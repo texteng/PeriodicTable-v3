@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, use } from 'react';
 import './Legend.scss';
-import { iLegendProps } from '../schemas/PropInterfaces';
 import { LegendData } from '../assets/LegendData';
+import { AppContext } from '../contexts/AppContext';
 
-const Legend: React.FC<iLegendProps> = React.memo(({ colorIndex, hover, wide }) => {
-  const [legendCategory, setLegendCategory] = useState(LegendData['cpk']);
+const Legend: React.FC = React.memo(() => {
+  const context = use(AppContext);
+  
+  if (!context) {
+    throw new Error('Legend must be used within AppProvider');
+  }
 
-  const handleHoverOver = (colorHex: string) => hover(colorHex)
-  const handleHoverLeave = () => hover('')
+  const { colorIndex, handleHoverCategory, isWide } = context;
+  const [legendCategory, setLegendCategory] = useState(LegendData.cpk);
+
+  const handleHoverOver = (colorHex: string) => handleHoverCategory(colorHex)
+  const handleHoverLeave = () => handleHoverCategory('')
 
   useEffect(() => {
     setLegendCategory(LegendData[colorIndex])
@@ -15,21 +22,21 @@ const Legend: React.FC<iLegendProps> = React.memo(({ colorIndex, hover, wide }) 
 
   const renderContainer = () => {
     const baseClasses = 'absolute px-2'
-    return wide ? `${baseClasses} lw-top lw-left`: `${baseClasses} l-top l-left`;
+    return isWide ? `${baseClasses} lw-top lw-left`: `${baseClasses} l-top l-left`;
   }
 
   const renderTitleClasses = () => {
     const baseClasses = 'block text-base';
-    return wide ? baseClasses : `${baseClasses} md:text-xl`
+    return isWide ? baseClasses : `${baseClasses} md:text-xl`
   }
 
   const renderFieldsClasses = () => {
     const baseClasses = 'flex flex-col gap-0 flex-wrap';
-    return wide ? `${baseClasses} lw-height` : `${baseClasses} l-height`;
+    return isWide ? `${baseClasses} lw-height` : `${baseClasses} l-height`;
   }
 
   const renderFieldClasses = () => {
-    return wide ? 'px-1' : 'px-1 md:px-3';
+    return isWide ? 'px-1' : 'px-1 md:px-3';
   }
 
   return (

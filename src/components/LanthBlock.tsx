@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, use } from 'react';
 import './LanthBlock.css';
-import { iLanthAndActinProps } from '../schemas/PropInterfaces';
 import ElementData from '../assets/ElementData';
+import { AppContext } from '../contexts/AppContext';
 
 
-const LanthBlock: React.FC<iLanthAndActinProps> = React.memo(({ obscure, hover, colorIndex }) => {
+const LanthBlock: React.FC = React.memo(() => {
+  const context = use(AppContext);
+  
+  if (!context) {
+    throw new Error('LanthBlock must be used within AppProvider');
+  }
+
+  const { hoverState: obscure, colorIndex, handleHoverLanth } = context;
+  
   const obscureStyles = { filter: "grayscale(80%)", opacity: .25 };
 
   const [style, setStyle] = useState({ 
@@ -14,8 +22,8 @@ const LanthBlock: React.FC<iLanthAndActinProps> = React.memo(({ obscure, hover, 
     opacity: 1 
   });
 
-  const handleHoverOver = () => hover(true);
-  const handleHoverLeave = () => hover(false);
+  const handleHoverOver = () => handleHoverLanth(true);
+  const handleHoverLeave = () => handleHoverLanth(false);
   const colorIndexChangeList = new Set(['group_block', 'category']);
 
   useEffect(() => {
